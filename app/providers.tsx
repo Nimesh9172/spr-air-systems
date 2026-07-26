@@ -3,6 +3,7 @@
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 import { themeConfig } from "@/config/theme";
 
 type ProvidersProps = {
@@ -21,6 +22,7 @@ export function Providers({ children }: ProvidersProps) {
       enableSystem
       disableTransitionOnChange
     >
+      <ScrollToTop />
       {children}
       <Toaster richColors closeButton position="top-right" />
     </ThemeProvider>

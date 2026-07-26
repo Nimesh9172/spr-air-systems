@@ -17,3 +17,4 @@ export {
   WhatsAppIcon,
 } from "@/components/layout/Navbar";
 export { SamplePage } from "@/components/layout/SamplePage";
+export { ScrollToTop } from "@/components/layout/ScrollToTop";

@@ -6,31 +6,36 @@ import { cn } from "@/lib/utils";
 
 type NavActiveLineProps = {
   className?: string;
-  layoutId?: string;
+  left: number;
+  width: number;
+  /** When false, snap into place (first measure) instead of springing. */
+  animate?: boolean;
 };
 
 /**
- * Shared sliding underline for the active desktop nav item.
- * Uses Framer Motion `layoutId` so the line animates between links.
+ * Single underline under the nav list — positioned by measured left/width.
+ * Avoids Framer `layoutId`, which mis-animates after page scroll.
  */
 export function NavActiveLine({
   className,
-  layoutId = "navbar-active-line",
+  left,
+  width,
+  animate = true,
 }: NavActiveLineProps) {
   return (
     <motion.span
-      layoutId={layoutId}
       aria-hidden
       className={cn(
-        "absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-current",
+        "pointer-events-none absolute bottom-0 h-0.5 rounded-full bg-primary",
         className,
       )}
-      transition={{
-        type: "spring",
-        stiffness: 420,
-        damping: 32,
-        mass: 0.6,
-      }}
+      initial={false}
+      animate={{ left, width, opacity: width > 0 ? 1 : 0 }}
+      transition={
+        animate
+          ? { type: "spring", stiffness: 420, damping: 32, mass: 0.6 }
+          : { duration: 0 }
+      }
     />
   );
 }

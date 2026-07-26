@@ -142,17 +142,15 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Avoid global smooth scrolling — it breaks App Router scroll-to-top
+       and leaves sticky headers covering the page start. */
+    scroll-behavior: auto;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     @apply font-sans;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
     *,
     *::before,
     *::after {
