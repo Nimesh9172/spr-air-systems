@@ -31,6 +31,6 @@ export const whatsappLink = SOCIAL_LINKS.find(
 );
 
 /** Public social profiles shown in the footer (excludes WhatsApp chat). */
-export const footerSocialLinks = SOCIAL_LINKS.filter(
+export const footerSocialLinks: readonly SocialLink[] = SOCIAL_LINKS.filter(
   (link) => link.platform !== "whatsapp",
 );
