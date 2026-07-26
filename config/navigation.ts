@@ -1,4 +1,4 @@
-import type { NavigationConfig } from "@/types/navigation";
+import type { NavigationConfig, NavigationItem } from "@/types/navigation";
 
 /**
  * Primary navigation matching the marketing site UI.
@@ -14,6 +14,10 @@ export const mainNavigation = [
   { label: "Request Quote", href: "/contact", kind: "cta" },
 ] as const satisfies NavigationConfig;
 
-export const navLinks = mainNavigation.filter((item) => item.kind !== "cta");
+export const navLinks: readonly NavigationItem[] = mainNavigation.filter(
+  (item) => (item as NavigationItem).kind !== "cta",
+);
 
-export const navCta = mainNavigation.find((item) => item.kind === "cta");
+export const navCta: NavigationItem | undefined = mainNavigation.find(
+  (item) => (item as NavigationItem).kind === "cta",
+);
