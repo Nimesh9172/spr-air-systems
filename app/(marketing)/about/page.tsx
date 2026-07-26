@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
 
-import { SamplePage } from "@/components/layout/SamplePage";
+import {
+  AboutCTA,
+  AboutCredentials,
+  AboutHero,
+  AboutIndustries,
+  AboutJourney,
+  AboutMission,
+  AboutStats,
+  AboutStory,
+  AboutWhyChoose,
+} from "@/components/marketing/About";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -10,9 +20,16 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <SamplePage
-      title="About Us"
-      description="Our company story, certifications, and engineering values will be presented on this page."
-    />
+    <main>
+      <AboutHero />
+      <AboutStory />
+      <AboutJourney />
+      <AboutMission />
+      <AboutStats />
+      <AboutIndustries />
+      <AboutWhyChoose />
+      <AboutCredentials />
+      <AboutCTA />
+    </main>
   );
 }

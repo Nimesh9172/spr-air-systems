@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 
-import { SamplePage } from "@/components/layout/SamplePage";
+import {
+  ContactHero,
+  ContactMap,
+  ContactSection,
+  ContactTrustBar,
+} from "@/components/marketing/Contact";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -10,9 +15,11 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <SamplePage
-      title="Contact"
-      description="Reach our sales and support teams, or submit a project enquiry. The contact form and details will live here."
-    />
+    <main>
+      <ContactHero />
+      <ContactSection />
+      <ContactTrustBar />
+      <ContactMap />
+    </main>
   );
 }
