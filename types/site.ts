@@ -27,4 +27,5 @@ export type SiteConfig = {
 export type SocialLink = {
   readonly platform: string;
   readonly href: string;
+  readonly label?: string;
 };

@@ -1,4 +1,16 @@
 /**
  * Shared motion keyframes and animation utilities for marketing UI.
- * Import from layout or globals when motion work begins.
  */
+
+@keyframes air-flow-sweep {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(320%);
+  }
+}
+
+@theme inline {
+  --animate-air-flow-sweep: air-flow-sweep 1.2s ease-out;
+}

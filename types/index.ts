@@ -9,7 +9,12 @@ export type {
   NavigationConfig,
   NavigationItem,
 } from "@/types/navigation";
-export type { Product } from "@/types/product";
+export type {
+  Product,
+  ProductCategory,
+  ProductCategoryIcon,
+  ProductCategoryItem,
+} from "@/types/product";
 export type {
   CompanyAddress,
   CompanyInfo,

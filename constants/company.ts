@@ -6,13 +6,13 @@ import type { CompanyInfo } from "@/types/site";
 export const COMPANY = {
   name: "SPR Air Systems",
   legalName: "SPR Air Systems",
-  email: "contact@example.com",
-  phone: "+00 00000 00000",
+  email: "info@sprair.com",
+  phone: "+91 98765 43210",
   address: {
-    street: "123 Industrial Avenue",
-    city: "Placeholder City",
-    region: "Placeholder State",
-    postalCode: "000000",
+    street: "Industrial Hub, Block 42",
+    city: "New Delhi",
+    region: "Delhi",
+    postalCode: "110001",
     country: "India",
   },
 } as const satisfies CompanyInfo;

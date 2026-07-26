@@ -1,0 +1,230 @@
+/**
+ * SPR Air Systems — design tokens
+ * Single source of truth for brandable visual foundations.
+ * Change values here to rebrand; consume via `var(--token-*)` or Tailwind `@theme` aliases.
+ */
+
+:root {
+  /* -------------------------------------------------------------------------- */
+  /* Color                                                                      */
+  /* -------------------------------------------------------------------------- */
+
+  /* Deep navy — matches SPR marketing UI (#002157) */
+  --token-color-primary: oklch(0.26 0.09 260);
+  --token-color-primary-foreground: oklch(0.99 0.005 250);
+
+  --token-color-secondary: oklch(0.96 0.015 250);
+  --token-color-secondary-foreground: oklch(0.26 0.09 260);
+
+  --token-color-accent: oklch(0.72 0.19 145);
+  --token-color-accent-foreground: oklch(0.99 0.01 145);
+
+  --token-color-background: oklch(1 0 0);
+  --token-color-foreground: oklch(0.26 0.09 260);
+
+  --token-color-muted: oklch(0.95 0.008 250);
+  --token-color-muted-foreground: oklch(0.5 0.02 250);
+
+  --token-color-border: oklch(0.88 0.012 250);
+
+  --token-color-success: oklch(0.55 0.12 150);
+  --token-color-success-foreground: oklch(0.98 0.01 150);
+
+  --token-color-warning: oklch(0.72 0.14 75);
+  --token-color-warning-foreground: oklch(0.28 0.05 75);
+
+  --token-color-error: oklch(0.55 0.2 25);
+  --token-color-error-foreground: oklch(0.98 0.01 25);
+
+  /* -------------------------------------------------------------------------- */
+  /* Radius                                                                     */
+  /* -------------------------------------------------------------------------- */
+
+  --token-radius-sm: 0.25rem;
+  --token-radius-md: 0.5rem;
+  --token-radius-lg: 0.75rem;
+  --token-radius-xl: 1rem;
+
+  /* -------------------------------------------------------------------------- */
+  /* Spacing (px scale → rem)                                                   */
+  /* -------------------------------------------------------------------------- */
+
+  --token-space-4: 0.25rem; /* 4px */
+  --token-space-8: 0.5rem; /* 8px */
+  --token-space-12: 0.75rem; /* 12px */
+  --token-space-16: 1rem; /* 16px */
+  --token-space-20: 1.25rem; /* 20px */
+  --token-space-24: 1.5rem; /* 24px */
+  --token-space-32: 2rem; /* 32px */
+  --token-space-40: 2.5rem; /* 40px */
+  --token-space-48: 3rem; /* 48px */
+  --token-space-64: 4rem; /* 64px */
+  --token-space-80: 5rem; /* 80px */
+  --token-space-120: 7.5rem; /* 120px */
+
+  /* -------------------------------------------------------------------------- */
+  /* Typography                                                                 */
+  /* -------------------------------------------------------------------------- */
+
+  --token-text-hero: clamp(2.75rem, 5vw + 1rem, 4.5rem);
+  --token-text-h1: clamp(2.25rem, 3vw + 1rem, 3.5rem);
+  --token-text-h2: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+  --token-text-h3: clamp(1.375rem, 1vw + 1rem, 1.75rem);
+  --token-text-body: 1rem;
+  --token-text-small: 0.875rem;
+
+  --token-leading-hero: 1.05;
+  --token-leading-heading: 1.15;
+  --token-leading-body: 1.6;
+  --token-leading-small: 1.45;
+
+  --token-tracking-hero: -0.03em;
+  --token-tracking-heading: -0.02em;
+  --token-tracking-body: 0em;
+
+  /* -------------------------------------------------------------------------- */
+  /* Container                                                                  */
+  /* -------------------------------------------------------------------------- */
+
+  --token-container-lg: 1280px;
+  --token-container-xl: 1440px;
+
+  /* -------------------------------------------------------------------------- */
+  /* Shadow                                                                     */
+  /* -------------------------------------------------------------------------- */
+
+  --token-shadow-card:
+    0 1px 2px oklch(0.2 0.02 250 / 6%),
+    0 4px 12px oklch(0.2 0.02 250 / 6%);
+
+  --token-shadow-floating:
+    0 4px 8px oklch(0.2 0.02 250 / 8%),
+    0 12px 28px oklch(0.2 0.02 250 / 10%);
+
+  --token-shadow-large:
+    0 8px 16px oklch(0.2 0.02 250 / 10%),
+    0 24px 48px oklch(0.2 0.02 250 / 14%);
+
+  /* -------------------------------------------------------------------------- */
+  /* Motion                                                                     */
+  /* -------------------------------------------------------------------------- */
+
+  --token-duration-fast: 150ms;
+  --token-duration-normal: 250ms;
+  --token-duration-slow: 400ms;
+
+  --token-ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --token-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dark {
+  --token-color-primary: oklch(0.82 0.03 250);
+  --token-color-primary-foreground: oklch(0.2 0.02 250);
+
+  --token-color-secondary: oklch(0.28 0.02 250);
+  --token-color-secondary-foreground: oklch(0.95 0.01 250);
+
+  --token-color-accent: oklch(0.68 0.08 210);
+  --token-color-accent-foreground: oklch(0.18 0.02 210);
+
+  --token-color-background: oklch(0.16 0.015 250);
+  --token-color-foreground: oklch(0.96 0.008 250);
+
+  --token-color-muted: oklch(0.24 0.018 250);
+  --token-color-muted-foreground: oklch(0.72 0.015 250);
+
+  --token-color-border: oklch(1 0 0 / 12%);
+
+  --token-color-success: oklch(0.68 0.12 150);
+  --token-color-success-foreground: oklch(0.18 0.02 150);
+
+  --token-color-warning: oklch(0.8 0.12 85);
+  --token-color-warning-foreground: oklch(0.22 0.04 85);
+
+  --token-color-error: oklch(0.68 0.17 25);
+  --token-color-error-foreground: oklch(0.18 0.02 25);
+
+  --token-shadow-card:
+    0 1px 2px oklch(0 0 0 / 35%),
+    0 4px 14px oklch(0 0 0 / 35%);
+
+  --token-shadow-floating:
+    0 6px 12px oklch(0 0 0 / 40%),
+    0 16px 32px oklch(0 0 0 / 40%);
+
+  --token-shadow-large:
+    0 12px 24px oklch(0 0 0 / 45%),
+    0 28px 56px oklch(0 0 0 / 45%);
+}
+
+/**
+ * Tailwind v4 theme aliases — enables utilities like `bg-ds-primary`, `p-ds-16`, `duration-ds-fast`.
+ * Prefixed with `ds-` so defaults and shadcn tokens remain untouched.
+ */
+@theme inline {
+  --color-ds-primary: var(--token-color-primary);
+  --color-ds-primary-foreground: var(--token-color-primary-foreground);
+  --color-ds-secondary: var(--token-color-secondary);
+  --color-ds-secondary-foreground: var(--token-color-secondary-foreground);
+  --color-ds-accent: var(--token-color-accent);
+  --color-ds-accent-foreground: var(--token-color-accent-foreground);
+  --color-ds-background: var(--token-color-background);
+  --color-ds-foreground: var(--token-color-foreground);
+  --color-ds-muted: var(--token-color-muted);
+  --color-ds-muted-foreground: var(--token-color-muted-foreground);
+  --color-ds-border: var(--token-color-border);
+  --color-ds-success: var(--token-color-success);
+  --color-ds-success-foreground: var(--token-color-success-foreground);
+  --color-ds-warning: var(--token-color-warning);
+  --color-ds-warning-foreground: var(--token-color-warning-foreground);
+  --color-ds-error: var(--token-color-error);
+  --color-ds-error-foreground: var(--token-color-error-foreground);
+
+  --radius-ds-sm: var(--token-radius-sm);
+  --radius-ds-md: var(--token-radius-md);
+  --radius-ds-lg: var(--token-radius-lg);
+  --radius-ds-xl: var(--token-radius-xl);
+
+  --spacing-ds-4: var(--token-space-4);
+  --spacing-ds-8: var(--token-space-8);
+  --spacing-ds-12: var(--token-space-12);
+  --spacing-ds-16: var(--token-space-16);
+  --spacing-ds-20: var(--token-space-20);
+  --spacing-ds-24: var(--token-space-24);
+  --spacing-ds-32: var(--token-space-32);
+  --spacing-ds-40: var(--token-space-40);
+  --spacing-ds-48: var(--token-space-48);
+  --spacing-ds-64: var(--token-space-64);
+  --spacing-ds-80: var(--token-space-80);
+  --spacing-ds-120: var(--token-space-120);
+
+  --text-hero: var(--token-text-hero);
+  --text-h1: var(--token-text-h1);
+  --text-h2: var(--token-text-h2);
+  --text-h3: var(--token-text-h3);
+  --text-body: var(--token-text-body);
+  --text-small: var(--token-text-small);
+
+  --leading-hero: var(--token-leading-hero);
+  --leading-heading: var(--token-leading-heading);
+  --leading-body: var(--token-leading-body);
+  --leading-small: var(--token-leading-small);
+
+  --tracking-hero: var(--token-tracking-hero);
+  --tracking-heading: var(--token-tracking-heading);
+  --tracking-body: var(--token-tracking-body);
+
+  --container-ds-lg: var(--token-container-lg);
+  --container-ds-xl: var(--token-container-xl);
+
+  --shadow-card: var(--token-shadow-card);
+  --shadow-floating: var(--token-shadow-floating);
+  --shadow-large: var(--token-shadow-large);
+
+  --duration-ds-fast: var(--token-duration-fast);
+  --duration-ds-normal: var(--token-duration-normal);
+  --duration-ds-slow: var(--token-duration-slow);
+
+  --ease-ds-standard: var(--token-ease-standard);
+  --ease-ds-emphasized: var(--token-ease-emphasized);
+}

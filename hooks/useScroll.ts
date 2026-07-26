@@ -1,9 +1,30 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
+type UseScrollOptions = {
+  /** Pixels past which `scrolled` becomes true. */
+  threshold?: number;
+};
+
 /**
- * Scroll position / direction hook for sticky headers and scroll-driven UI.
- * Implement with window listeners when layout components are built.
+ * Tracks window scroll for sticky header / reveal behavior.
  */
-export function useScroll() {
-  return { x: 0, y: 0 };
+export function useScroll({ threshold = 8 }: UseScrollOptions = {}) {
+  const [y, setY] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const nextY = window.scrollY;
+      setY(nextY);
+      setScrolled(nextY > threshold);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [threshold]);
+
+  return { x: 0, y, scrolled };
 }

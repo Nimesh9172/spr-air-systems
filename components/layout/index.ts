@@ -1,6 +1,19 @@
 /**
- * Site chrome: header, footer, navigation shells, page wrappers.
- * Keep layout concerns out of route files and section components.
+ * Site chrome: header, footer, navigation shells, and page wrappers.
  */
 
-export {};
+export {
+  FloatingWhatsApp,
+  Footer,
+  NewsletterForm,
+} from "@/components/layout/Footer";
+export {
+  isNavActive,
+  MobileNav,
+  Navbar,
+  NavActiveLine,
+  NavbarBottomLine,
+  NavLinks,
+  WhatsAppIcon,
+} from "@/components/layout/Navbar";
+export { SamplePage } from "@/components/layout/SamplePage";
