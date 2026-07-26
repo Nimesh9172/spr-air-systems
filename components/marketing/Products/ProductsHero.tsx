@@ -1,12 +1,9 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { ArrowRightIcon, FileTextIcon } from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { DownloadIcon } from "lucide-react";
 
 import { Container } from "@/components/core/Container";
-import { RequestQuoteDialog } from "@/components/forms/RequestQuote";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -35,16 +32,15 @@ const reducedItemVariants: Variants = {
 };
 
 /**
- * About Us page hero — left-aligned copy with CTAs on the right.
+ * Products page header — catalog intro and brochure download action.
  */
-export function AboutHero() {
+export function ProductsHero() {
   const prefersReducedMotion = useReducedMotion();
   const item = prefersReducedMotion ? reducedItemVariants : itemVariants;
-  const [quoteOpen, setQuoteOpen] = useState(false);
 
   return (
     <section
-      data-slot="about-hero"
+      data-slot="products-hero"
       className="relative isolate overflow-hidden bg-[linear-gradient(135deg,oklch(0.97_0.02_250)_0%,oklch(0.985_0.01_250)_42%,oklch(0.96_0.035_250)_100%)]"
     >
       {/* Soft blue glow accents */}
@@ -74,61 +70,42 @@ export function AboutHero() {
                 style={{ backgroundColor: ACCENT }}
                 aria-hidden
               />
-              About Us
+              Product Catalog
             </motion.p>
 
             <motion.h1
               className="mt-4 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]"
               variants={item}
             >
-              Engineering{" "}
-              <span className="text-[oklch(0.52_0.16_255)]">Reliable</span>{" "}
-              Compressed Air Solutions{" "}
-              <span className="text-[oklch(0.52_0.16_255)]">
-                For Modern Industries.
-              </span>
+              Industrial Air Compression{" "}
+              <span className="text-[oklch(0.52_0.16_255)]">Solutions</span>
             </motion.h1>
 
             <motion.p
               className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground"
               variants={item}
             >
-              For over 25 years, SPR Air Systems has been helping manufacturers
-              improve productivity through energy-efficient compressed air
-              solutions.
+              Engineering high-performance air systems for mission-critical
+              industrial applications. From heavy-duty reciprocating units to
+              precision oil-free technology.
             </motion.p>
           </div>
 
-          <motion.div
-            variants={item}
-            className="flex flex-wrap items-center gap-3 lg:shrink-0 lg:pb-1"
-          >
-            <Link
-              href="/products"
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "h-11 cursor-pointer rounded-md bg-[oklch(0.52_0.16_255)] px-5 text-sm font-semibold text-white hover:bg-[oklch(0.46_0.16_255)]",
-              )}
-            >
-              Explore Products
-              <ArrowRightIcon className="size-4" aria-hidden />
-            </Link>
-            <button
-              type="button"
-              onClick={() => setQuoteOpen(true)}
+          <motion.div variants={item} className="lg:shrink-0 lg:pb-1">
+            <a
+              href="/brochures/spr-air-systems-catalogue.pdf"
+              download
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "h-11 cursor-pointer rounded-md border-[oklch(0.52_0.16_255)] bg-white px-5 text-sm font-semibold text-[oklch(0.52_0.16_255)] hover:bg-[oklch(0.96_0.02_250)] hover:text-[oklch(0.46_0.16_255)]",
+                "h-11 rounded-md border-[oklch(0.52_0.16_255)] bg-white px-5 text-sm font-semibold text-[oklch(0.52_0.16_255)] hover:bg-[oklch(0.96_0.02_250)] hover:text-[oklch(0.46_0.16_255)]",
               )}
             >
-              <FileTextIcon className="size-4" aria-hidden />
-              Request Quote
-            </button>
+              <DownloadIcon className="size-4" aria-hidden />
+              Download Full Catalogue
+            </a>
           </motion.div>
         </motion.div>
       </Container>
-
-      <RequestQuoteDialog open={quoteOpen} onOpenChange={setQuoteOpen} />
     </section>
   );
 }

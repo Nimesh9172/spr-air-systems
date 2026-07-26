@@ -4,7 +4,6 @@ import {
   ContactHero,
   ContactMap,
   ContactSection,
-  ContactTrustBar,
 } from "@/components/marketing/Contact";
 
 export const metadata: Metadata = {
@@ -18,7 +17,6 @@ export default function ContactPage() {
     <main>
       <ContactHero />
       <ContactSection />
-      <ContactTrustBar />
       <ContactMap />
     </main>
   );

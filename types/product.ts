@@ -36,3 +36,31 @@ export type ProductCategory = {
   readonly icon: ProductCategoryIcon;
   readonly products: readonly ProductCategoryItem[];
 };
+
+/** Industry application used to filter the catalog. */
+export type ProductApplication =
+  | "manufacturing"
+  | "pharmaceutical"
+  | "oil-and-gas"
+  | "food-and-beverage";
+
+/**
+ * Visual emphasis for catalog badges and spec labels.
+ * `eco` maps to the success/green tone, `default` to the brand blue.
+ */
+export type ProductTone = "default" | "eco";
+
+/** A catalog entry rendered as a card on the /products page. */
+export type CatalogProduct = {
+  readonly id: string;
+  readonly name: string;
+  readonly slug: string;
+  readonly badge: string;
+  readonly description: string;
+  /** Short spec highlight shown in the card footer. */
+  readonly spec: string;
+  readonly tone: ProductTone;
+  readonly applications: readonly ProductApplication[];
+  readonly image?: string;
+  readonly imageAlt?: string;
+};

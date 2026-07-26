@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { SamplePage } from "@/components/layout/SamplePage";
+import { ProductCatalog, ProductsHero } from "@/components/marketing/Products";
 
 export const metadata: Metadata = {
   title: "Products",
@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
-    <SamplePage
-      title="Products"
-      description="Browse our portfolio of compressed air systems and industrial equipment. Detailed product pages will live here."
-    />
+    <main>
+      <ProductsHero />
+      <ProductCatalog />
+    </main>
   );
 }

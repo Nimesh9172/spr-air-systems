@@ -109,7 +109,7 @@ export function GetInTouch() {
     <Section
       data-slot="get-in-touch"
       spacing="sm"
-      className="relative overflow-hidden bg-white"
+      className="relative overflow-hidden bg-[oklch(0.97_0.01_250)]"
     >
       {/* Decorative flowing air-lines — bottom */}
       <div
