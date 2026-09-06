@@ -20,7 +20,8 @@ import { Section } from "@/components/core/Section";
 import { Button } from "@/components/core/Button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { COMPANY } from "@/constants/company";
+import { COMPANY, COMPANY_ADDRESS_TEXT } from "@/constants/company";
+import { ENQUIRY_INTERESTS } from "@/constants/enquiry";
 import { cn } from "@/lib/utils";
 import { submitContact } from "@/services/contact.service";
 
@@ -48,26 +49,17 @@ const reducedItemVariants: Variants = {
   visible: { opacity: 1, transition: ITEM_TRANSITION },
 };
 
-const REQUIREMENTS = [
-  "Air Compressors",
-  "Screw Compressors",
-  "Pumps",
-  "Service & Maintenance",
-  "Custom System Design",
-  "Request a Quote",
-  "Other",
-] as const;
-
 const CONTACT_ROWS: {
   icon: LucideIcon;
   label: string;
-  value: string;
+  value?: string;
   href?: string;
+  values?: { text: string; href: string }[];
 }[] = [
   {
     icon: MapPinIcon,
     label: "Headquarters",
-    value: `${COMPANY.address.street}, ${COMPANY.address.city}, ${COMPANY.address.country}`,
+    value: COMPANY_ADDRESS_TEXT,
   },
   {
     icon: PhoneIcon,
@@ -78,8 +70,10 @@ const CONTACT_ROWS: {
   {
     icon: MailIcon,
     label: "Email Support",
-    value: COMPANY.email,
-    href: `mailto:${COMPANY.email}`,
+    values: COMPANY.emails.map((email) => ({
+      text: email,
+      href: `mailto:${email}`,
+    })),
   },
 ];
 
@@ -191,7 +185,19 @@ export function GetInTouch() {
             <motion.ul className="mt-8 flex flex-col gap-5" variants={item}>
               {CONTACT_ROWS.map((row) => {
                 const Icon = row.icon;
-                const value = row.href ? (
+                const value = row.values ? (
+                  <div className="flex flex-col gap-0.5">
+                    {row.values.map((item) => (
+                      <a
+                        key={item.href}
+                        href={item.href}
+                        className="text-sm leading-relaxed text-muted-foreground outline-none transition-colors hover:text-[oklch(0.52_0.16_255)] focus-visible:text-[oklch(0.52_0.16_255)]"
+                      >
+                        {item.text}
+                      </a>
+                    ))}
+                  </div>
+                ) : row.href ? (
                   <a
                     href={row.href}
                     className="text-sm leading-relaxed text-muted-foreground outline-none transition-colors hover:text-[oklch(0.52_0.16_255)] focus-visible:text-[oklch(0.52_0.16_255)]"
@@ -310,7 +316,7 @@ export function GetInTouch() {
                       <option value="" disabled>
                         Select Requirement
                       </option>
-                      {REQUIREMENTS.map((option) => (
+                      {ENQUIRY_INTERESTS.map((option) => (
                         <option key={option} value={option}>
                           {option}
                         </option>

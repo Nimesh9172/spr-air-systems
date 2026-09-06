@@ -37,12 +37,12 @@ export function Navbar() {
           className="relative z-10 shrink-0"
         >
           <Image
-            src="/logos/spr-air-systems.png"
+            src="/logos/logo-dark1.png"
             alt={siteConfig.name}
             width={1850}
             height={973}
             priority
-            className="h-11 w-auto object-contain"
+            className="h-11 w-auto object-contain scale-[2]"
           />
         </Link>
 

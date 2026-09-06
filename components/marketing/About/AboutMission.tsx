@@ -47,7 +47,7 @@ const CARDS = [
   {
     icon: CompassIcon,
     title: "Our Vision",
-    body: "To be the most trusted global partner in compressed air systems by setting the benchmark for quality, innovation and customer satisfaction.",
+    body: "To be the most trusted partner in compressed air systems by setting the benchmark for quality, innovation and customer satisfaction.",
     extras: null as string[] | null,
   },
   {

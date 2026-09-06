@@ -8,16 +8,16 @@ import { useMemo, useState } from "react";
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
-import { catalogProducts, productApplications } from "@/data/products";
+import { catalogProducts, productFamilies } from "@/data/products";
 import { cn } from "@/lib/utils";
-import type { ProductApplication } from "@/types/product";
+import type { ProductFamily } from "@/types/product";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.5, ease: EASE_OUT } as const;
 const ACCENT = "oklch(0.52 0.16 255)";
 
 const ALL = "all" as const;
-type FilterValue = typeof ALL | ProductApplication;
+type FilterValue = typeof ALL | ProductFamily;
 
 const containerVariants: Variants = {
   hidden: {},
@@ -39,7 +39,7 @@ const reducedItemVariants: Variants = {
   visible: { opacity: 1, transition: ITEM_TRANSITION },
 };
 
-/** Blue for standard products, green for eco / oil-free lines. */
+/** Blue for standard products, green for energy-saving / eco lines. */
 const toneClass = {
   default: {
     badge: "bg-[oklch(0.52_0.16_255)] text-white",
@@ -64,7 +64,7 @@ export function ProductCatalog() {
     () =>
       filter === ALL
         ? catalogProducts
-        : catalogProducts.filter((p) => p.applications.includes(filter)),
+        : catalogProducts.filter((p) => p.family === filter),
     [filter],
   );
 
@@ -80,7 +80,7 @@ export function ProductCatalog() {
           <div className="flex flex-col gap-5 lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-2xl border border-border/60 bg-white p-5 shadow-[0_8px_28px_-18px_oklch(0.26_0.09_260_/_20%)]">
               <h2 className="text-xs font-bold tracking-[0.14em] text-foreground uppercase">
-                Application Filter
+                Product Line
               </h2>
               <div
                 className="mt-3 h-0.5 w-8 rounded-full"
@@ -90,16 +90,16 @@ export function ProductCatalog() {
 
               <ul className="mt-5 flex flex-col gap-1">
                 <FilterOption
-                  label="All Applications"
+                  label="All Products"
                   checked={filter === ALL}
                   onSelect={() => setFilter(ALL)}
                 />
-                {productApplications.map((app) => (
+                {productFamilies.map((family) => (
                   <FilterOption
-                    key={app.id}
-                    label={app.label}
-                    checked={filter === app.id}
-                    onSelect={() => setFilter(app.id)}
+                    key={family.id}
+                    label={family.label}
+                    checked={filter === family.id}
+                    onSelect={() => setFilter(family.id)}
                   />
                 ))}
               </ul>

@@ -16,7 +16,6 @@ const QUICK_LINKS_LEFT = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
   { label: "Solutions", href: "/solutions" },
-  { label: "Services", href: "/services" },
 ] as const;
 
 const QUICK_LINKS_RIGHT = [
@@ -48,11 +47,11 @@ export function Footer() {
                 className="inline-block"
               >
                 <Image
-                  src="/logos/spr-air-systems.png"
+                  src="/logos/logo-light.png"
                   alt={siteConfig.name}
                   width={1850}
                   height={973}
-                  className="h-12 w-auto object-contain object-left sm:h-14"
+                  className="h-12 w-auto object-contain object-left sm:h-14 zoom-[2]"
                 />
               </Link>
 

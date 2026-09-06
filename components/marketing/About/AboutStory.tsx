@@ -4,13 +4,14 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   AwardIcon,
   FactoryIcon,
-  ShieldCheckIcon,
+  HeadsetIcon,
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
+import { COMPANY_STATS } from "@/constants/company";
 import { cn } from "@/lib/utils";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
@@ -52,9 +53,17 @@ const STORY_STATS: {
   value: string;
   label: string;
 }[] = [
-  { icon: AwardIcon, value: "25+", label: "Years of Experience" },
-  { icon: FactoryIcon, value: "1,000+", label: "Installations Worldwide" },
-  { icon: ShieldCheckIcon, value: "ISO", label: "9001:2015 Certified" },
+  {
+    icon: AwardIcon,
+    value: `${COMPANY_STATS.yearsExperience}+`,
+    label: "Years of Experience",
+  },
+  {
+    icon: FactoryIcon,
+    value: `${COMPANY_STATS.systemsInstalled}+`,
+    label: "Systems Installed",
+  },
+  { icon: HeadsetIcon, value: "24/7", label: "Support Available" },
 ];
 
 /**

@@ -2,8 +2,8 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
-  BarChart2Icon,
   BuildingIcon,
+  HeadsetIcon,
   PackageIcon,
   ShieldCheckIcon,
   TrendingUpIcon,
@@ -11,6 +11,7 @@ import {
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
+import { COMPANY_STATS } from "@/constants/company";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.6, ease: EASE_OUT } as const;
@@ -38,38 +39,38 @@ const reducedItemVariants: Variants = {
 
 const MILESTONES = [
   {
-    year: "2001",
+    year: String(COMPANY_STATS.foundedYear),
     icon: BuildingIcon,
     title: "Company Founded",
     description:
       "Started our journey with a commitment to quality and reliability.",
   },
   {
-    year: "2008",
-    icon: BarChart2Icon,
-    title: "500+ Installations",
-    description: "Reached a milestone of 500+ successful installations.",
-  },
-  {
     year: "2015",
     icon: ShieldCheckIcon,
-    title: "ISO Certification",
+    title: "Quality Assurance",
     description:
-      "Achieved ISO 9001:2015 certification for quality management.",
+      "Built in-house inspection and testing for every system we deliver.",
   },
   {
-    year: "2020",
+    year: "2018",
     icon: PackageIcon,
     title: "Product Expansion",
     description:
       "Expanded our range with advanced and energy-efficient solutions.",
   },
   {
-    year: "2025",
-    icon: TrendingUpIcon,
-    title: "1000+ Installations",
+    year: "2022",
+    icon: HeadsetIcon,
+    title: "Dedicated Support",
     description:
-      "Crossed 1000+ installations and continue to grow together.",
+      "Grew on-site installation, AMC, and 24/7 after-sales support.",
+  },
+  {
+    year: "2026",
+    icon: TrendingUpIcon,
+    title: `${COMPANY_STATS.systemsInstalled}+ Installations`,
+    description: `Crossed ${COMPANY_STATS.systemsInstalled}+ installations and continue to grow together.`,
   },
 ] as const;
 

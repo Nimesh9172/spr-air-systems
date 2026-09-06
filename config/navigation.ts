@@ -8,7 +8,6 @@ export const mainNavigation = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
   { label: "Solutions", href: "/solutions" },
-  { label: "Services", href: "/services" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "Request Quote", href: "/contact", kind: "cta" },

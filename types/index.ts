@@ -6,14 +6,26 @@ export type {
 } from "@/types/common";
 export type { Industry } from "@/types/industry";
 export type {
+  FilterGrade,
+  FilterGradeTone,
+  SolutionCategory,
+  SolutionIconKey,
+  SolutionLine,
+  SolutionServiceItem,
+  SolutionSpec,
+} from "@/types/solution";
+export type {
   NavigationConfig,
   NavigationItem,
 } from "@/types/navigation";
 export type {
+  CatalogProduct,
   Product,
   ProductCategory,
   ProductCategoryIcon,
   ProductCategoryItem,
+  ProductFamily,
+  ProductTone,
 } from "@/types/product";
 export type {
   CompanyAddress,

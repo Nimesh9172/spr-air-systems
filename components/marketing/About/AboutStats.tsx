@@ -1,35 +1,41 @@
-import { CogIcon, HeadsetIcon, UsersIcon, WrenchIcon } from "lucide-react";
+import { CogIcon, HeadsetIcon, UsersIcon, WrenchIcon, type LucideIcon } from "lucide-react";
 
 import { AnimatedCounter } from "@/components/core/AnimatedCounter";
 import { Container } from "@/components/core/Container";
+import { COMPANY_STATS } from "@/constants/company";
 import { cn } from "@/lib/utils";
 
-const STATS = [
+const STATS: {
+  icon: LucideIcon;
+  label: string;
+  value?: number;
+  suffix?: string;
+  display?: string;
+}[] = [
   {
     icon: CogIcon,
-    value: 1000,
+    value: COMPANY_STATS.systemsInstalled,
     suffix: "+",
-    label: "Machines Installed",
+    label: "Systems Installed",
   },
   {
     icon: UsersIcon,
-    value: 500,
+    value: COMPANY_STATS.happyClients,
     suffix: "+",
-    label: "Global Clients",
+    label: "Happy Clients",
   },
   {
     icon: WrenchIcon,
-    value: 25,
+    value: COMPANY_STATS.yearsExperience,
     suffix: "+",
     label: "Years Experience",
   },
   {
     icon: HeadsetIcon,
-    value: 150,
-    suffix: "+",
-    label: "Expert Engineers",
+    display: "24/7",
+    label: "Support Available",
   },
-] as const;
+];
 
 /**
  * About page stats bar — four counters on a deep blue background.
@@ -61,8 +67,14 @@ export function AboutStats() {
                 </span>
 
                 <p className="text-3xl font-bold tracking-tight text-white sm:text-[2rem]">
-                  <AnimatedCounter to={stat.value} />
-                  {stat.suffix}
+                  {stat.display ? (
+                    stat.display
+                  ) : (
+                    <>
+                      <AnimatedCounter to={stat.value!} />
+                      {stat.suffix}
+                    </>
+                  )}
                 </p>
 
                 <div

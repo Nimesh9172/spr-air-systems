@@ -11,6 +11,7 @@ import {
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
+import { COMPANY_STATS } from "@/constants/company";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.55, ease: EASE_OUT } as const;
@@ -43,7 +44,7 @@ const TRUST_ITEMS: {
   {
     icon: ShieldCheckIcon,
     title: "Expert Engineers",
-    description: "25+ years of experience in compressed air systems",
+    description: `${COMPANY_STATS.yearsExperience}+ years of experience in compressed air systems`,
   },
   {
     icon: SettingsIcon,
@@ -58,7 +59,7 @@ const TRUST_ITEMS: {
   {
     icon: HandshakeIcon,
     title: "Trusted by Industries",
-    description: "Serving 500+ global clients across industries",
+    description: `Serving ${COMPANY_STATS.happyClients}+ clients across industries`,
   },
 ];
 

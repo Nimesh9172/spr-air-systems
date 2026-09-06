@@ -5,7 +5,7 @@ import {
   AboutCredentials,
   AboutHero,
   AboutIndustries,
-  AboutJourney,
+  // AboutJourney,
   AboutMission,
   AboutStats,
   AboutStory,
@@ -23,7 +23,7 @@ export default function AboutPage() {
     <main>
       <AboutHero />
       <AboutStory />
-      <AboutJourney />
+      {/* <AboutJourney /> */}
       <AboutMission />
       <AboutStats />
       <AboutIndustries />

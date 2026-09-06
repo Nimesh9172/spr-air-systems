@@ -58,14 +58,14 @@ const PILLARS: {
     icon: ZapIcon,
     title: "Energy Efficient",
     description:
-      "Advanced technology that reduces power consumption by up to 35% compared to conventional systems.",
+      "PM motor VFD packages that match motor speed to air demand instead of running unloaded.",
     href: "/solutions",
   },
   {
     icon: SettingsIcon,
     title: "Industry Expertise",
     description:
-      "Deep domain knowledge across 10+ industries ensures tailored solutions for your specific needs.",
+      "Domain knowledge across manufacturing, automotive, pharmaceuticals, food, textile, and engineering plants.",
     href: "/solutions",
   },
   {
@@ -87,7 +87,7 @@ const PILLARS: {
     title: "Custom Engineering",
     description:
       "Bespoke solutions designed and engineered to match your exact operational requirements.",
-    href: "/services",
+    href: "/solutions",
   },
 ];
 

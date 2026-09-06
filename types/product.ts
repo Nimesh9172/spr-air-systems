@@ -16,8 +16,10 @@ export type Product = {
  */
 export type ProductCategoryIcon =
   | "air-compressor"
-  | "screw-compressor"
-  | "pump";
+  | "air-dryer"
+  | "air-filter"
+  | "ppr-piping"
+  | "spares";
 
 /** A single product shown within a category showcase. */
 export type ProductCategoryItem = {
@@ -37,12 +39,13 @@ export type ProductCategory = {
   readonly products: readonly ProductCategoryItem[];
 };
 
-/** Industry application used to filter the catalog. */
-export type ProductApplication =
-  | "manufacturing"
-  | "pharmaceutical"
-  | "oil-and-gas"
-  | "food-and-beverage";
+/** Product family used to filter the catalog. */
+export type ProductFamily =
+  | "air-compressors"
+  | "air-dryers"
+  | "air-filters"
+  | "ppr-piping"
+  | "spares";
 
 /**
  * Visual emphasis for catalog badges and spec labels.
@@ -60,7 +63,7 @@ export type CatalogProduct = {
   /** Short spec highlight shown in the card footer. */
   readonly spec: string;
   readonly tone: ProductTone;
-  readonly applications: readonly ProductApplication[];
+  readonly family: ProductFamily;
   readonly image?: string;
   readonly imageAlt?: string;
 };

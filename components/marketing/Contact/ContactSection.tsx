@@ -30,6 +30,7 @@ import { Section } from "@/components/core/Section";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { COMPANY } from "@/constants/company";
+import { ENQUIRY_INTERESTS } from "@/constants/enquiry";
 import { cn } from "@/lib/utils";
 import { submitContact } from "@/services/contact.service";
 
@@ -59,15 +60,6 @@ const reducedItemVariants: Variants = {
   visible: { opacity: 1, transition: ITEM_TRANSITION },
 };
 
-const INTERESTS = [
-  "Air Compressors",
-  "Screw Compressors",
-  "Pumps",
-  "Service & Maintenance",
-  "Custom System Design",
-  "Other",
-] as const;
-
 const CONTACT_BLOCKS: {
   icon: LucideIcon;
   title: string;
@@ -81,25 +73,21 @@ const CONTACT_BLOCKS: {
         text: COMPANY.phone,
         href: `tel:${COMPANY.phone.replace(/\s/g, "")}`,
       },
-      { text: "Mon – Fri, 9:00 AM – 6:00 PM" },
+      { text: "Mon – Sat, 9:00 AM – 6:00 PM" },
     ],
   },
   {
     icon: MailIcon,
     title: "Email Us",
-    lines: [
-      { text: COMPANY.email, href: `mailto:${COMPANY.email}` },
-      { text: "sales@sprair.com", href: "mailto:sales@sprair.com" },
-    ],
+    lines: COMPANY.emails.map((email) => ({
+      text: email,
+      href: `mailto:${email}`,
+    })),
   },
   {
     icon: MapPinIcon,
     title: "Our Office",
-    lines: [
-      {
-        text: `${COMPANY.address.street}, ${COMPANY.address.city}, ${COMPANY.address.country}`,
-      },
-    ],
+    lines: COMPANY.address.lines.map((text) => ({ text })),
   },
   {
     icon: ClockIcon,
@@ -356,7 +344,7 @@ export function ContactSection() {
                       <option value="" disabled>
                         Select interest
                       </option>
-                      {INTERESTS.map((option) => (
+                      {ENQUIRY_INTERESTS.map((option) => (
                         <option key={option} value={option}>
                           {option}
                         </option>

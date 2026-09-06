@@ -20,10 +20,10 @@ const reducedItemVariants: Variants = {
   visible: { opacity: 1, transition: ITEM_TRANSITION },
 };
 
-const ADDRESS = `${COMPANY.name}, ${COMPANY.address.street}, ${COMPANY.address.city}, ${COMPANY.address.country}`;
-const MAPS_QUERY = encodeURIComponent(ADDRESS);
-const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${MAPS_QUERY}`;
-const MAP_EMBED = `https://maps.google.com/maps?q=${MAPS_QUERY}&z=14&output=embed`;
+const { lat, lng } = COMPANY.address.coordinates;
+const MAPS_QUERY = `${lat},${lng}`;
+const MAPS_LINK = `https://www.google.com/maps?q=${MAPS_QUERY}`;
+const MAP_EMBED = `https://maps.google.com/maps?q=${MAPS_QUERY}&z=17&output=embed`;
 
 /**
  * Contact page map — embedded location with floating address card.
@@ -70,8 +70,11 @@ export function ContactMap() {
                   {COMPANY.name}
                 </p>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                  {COMPANY.address.street}, {COMPANY.address.city},{" "}
-                  {COMPANY.address.country}
+                  {COMPANY.address.lines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
                 </p>
                 <a
                   href={MAPS_LINK}

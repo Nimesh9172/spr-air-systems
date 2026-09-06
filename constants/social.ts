@@ -21,7 +21,7 @@ export const SOCIAL_LINKS = [
   },
   {
     platform: "whatsapp",
-    href: "https://wa.me/919876543210",
+    href: "https://wa.me/919049125142",
     label: "WhatsApp",
   },
 ] as const satisfies readonly SocialLink[];

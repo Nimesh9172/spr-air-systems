@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Container } from "@/components/core/Container";
 import { RequestQuoteDialog } from "@/components/forms/RequestQuote";
 import { buttonVariants } from "@/components/ui/button";
+import { COMPANY_STATS } from "@/constants/company";
 import { cn } from "@/lib/utils";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
@@ -93,9 +94,9 @@ export function AboutHero() {
               className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground"
               variants={item}
             >
-              For over 25 years, SPR Air Systems has been helping manufacturers
-              improve productivity through energy-efficient compressed air
-              solutions.
+              For over {COMPANY_STATS.yearsExperience} years, SPR Air Systems has been helping
+              manufacturers improve productivity through energy-efficient
+              compressed air solutions.
             </motion.p>
           </div>
 

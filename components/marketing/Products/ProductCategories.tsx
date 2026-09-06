@@ -3,9 +3,11 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   ArrowRightIcon,
-  CogIcon,
   CylinderIcon,
   DropletsIcon,
+  FunnelIcon,
+  PackageIcon,
+  RouteIcon,
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
@@ -20,8 +22,10 @@ import type { ProductCategoryIcon } from "@/types/product";
 /** Resolve a serializable category icon key to its Lucide component. */
 const CATEGORY_ICONS: Record<ProductCategoryIcon, LucideIcon> = {
   "air-compressor": CylinderIcon,
-  "screw-compressor": CogIcon,
-  pump: DropletsIcon,
+  "air-dryer": DropletsIcon,
+  "air-filter": FunnelIcon,
+  "ppr-piping": RouteIcon,
+  spares: PackageIcon,
 };
 
 /** Homepage links point at the catalog; deep links can use the slugs later. */
@@ -184,7 +188,14 @@ export function ProductCategories() {
                   </Link>
                 </motion.div>
 
-                <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+                <ul
+                  className={cn(
+                    "grid gap-4 sm:grid-cols-2 lg:gap-5",
+                    category.products.length <= 2 && "lg:grid-cols-2",
+                    category.products.length === 4 && "lg:grid-cols-4",
+                    category.products.length >= 5 && "lg:grid-cols-5",
+                  )}
+                >
                   {category.products.map((product) => (
                     <motion.li key={product.name} variants={item}>
                       <motion.div

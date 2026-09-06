@@ -7,12 +7,18 @@ export type CompanyAddress = {
   readonly region: string;
   readonly postalCode: string;
   readonly country: string;
+  readonly lines: readonly string[];
+  readonly coordinates: {
+    readonly lat: number;
+    readonly lng: number;
+  };
 };
 
 export type CompanyInfo = {
   readonly name: string;
   readonly legalName: string;
   readonly email: string;
+  readonly emails: readonly string[];
   readonly phone: string;
   readonly address: CompanyAddress;
 };

@@ -55,16 +55,16 @@ const FEATURES: {
 }[] = [
   {
     icon: BadgeCheckIcon,
-    title: "ISO 9001:2015 Certified",
+    title: "Factory-Tested Quality",
     description:
-      "Adhering to the highest global standards of quality management and operational efficiency.",
+      "Every system is inspected and performance-tested before dispatch, so you get reliable air from day one.",
     tone: "blue",
   },
   {
     icon: ZapIcon,
     title: "Energy Efficient Design",
     description:
-      "Optimized VFD systems that reduce power consumption by up to 35% compared to standard models.",
+      "PM motor VFD packages that match motor speed to air demand and cut wasted unload energy.",
     tone: "green",
   },
 ];
@@ -184,8 +184,7 @@ export function Precision() {
               >
                 At SPR Air Systems, we don&apos;t just provide equipment; we
                 engineer reliability. Our systems are the heartbeat of
-                manufacturing plants, pharmaceutical labs, and automotive lines
-                worldwide.
+                manufacturing plants, pharmaceutical labs, and automotive lines.
               </motion.p>
 
               <ul className="mt-8 flex flex-col gap-5">

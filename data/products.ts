@@ -1,8 +1,8 @@
 import type { ContentSummary } from "@/types/common";
 import type {
   CatalogProduct,
-  ProductApplication,
   ProductCategory,
+  ProductFamily,
 } from "@/types/product";
 
 /**
@@ -23,50 +23,69 @@ export const productCategories: readonly ProductCategory[] = [
     slug: "air-compressors",
     icon: "air-compressor",
     products: [
-      { name: "Reciprocating Air Compressor", slug: "reciprocating-air-compressor" },
-      { name: "Rotary Screw Air Compressor", slug: "rotary-screw-air-compressor" },
-      { name: "Portable Air Compressor", slug: "portable-air-compressor" },
-      { name: "High Pressure Air Compressor", slug: "high-pressure-air-compressor" },
+      { name: "Reciprocating Air Compressors", slug: "reciprocating-air-compressor" },
+      { name: "Direct Drive With PM Motor VFD", slug: "direct-drive-pm-motor-vfd" },
+      { name: "Base Mounted Screw Compressors", slug: "base-mounted-screw-compressor" },
+      { name: "Tank Mounted Full Feature", slug: "tank-mounted-full-feature" },
+      { name: "High Pressure 16 Bar", slug: "high-pressure-16-bar" },
     ],
   },
   {
-    id: "screw-compressors",
-    title: "Screw Compressors",
-    slug: "screw-compressors",
-    icon: "screw-compressor",
+    id: "air-dryers",
+    title: "Air Dryers",
+    slug: "air-dryers",
+    icon: "air-dryer",
     products: [
-      { name: "Oil Injected Screw Compressor", slug: "oil-injected-screw-compressor" },
-      { name: "Oil Free Screw Compressor", slug: "oil-free-screw-compressor" },
-      { name: "VSD Screw Compressor", slug: "vsd-screw-compressor" },
-      { name: "Two Stage Screw Compressor", slug: "two-stage-screw-compressor" },
+      { name: "Refrigerated Air Dryers", slug: "refrigerated-air-dryer" },
+      { name: "Desiccant Air Dryers", slug: "desiccant-air-dryer" },
     ],
   },
   {
-    id: "industrial-pumps",
-    title: "Industrial Pumps",
-    slug: "industrial-pumps",
-    icon: "pump",
+    id: "air-filters",
+    title: "Compressed Air Filters",
+    slug: "compressed-air-filters",
+    icon: "air-filter",
     products: [
-      { name: "Centrifugal Pump", slug: "centrifugal-pump" },
-      { name: "Multistage Pump", slug: "multistage-pump" },
-      { name: "Submersible Pump", slug: "submersible-pump" },
-      { name: "Self Priming Pump", slug: "self-priming-pump" },
+      { name: "Pre Filter", slug: "pre-filter" },
+      { name: "After Filter", slug: "after-filter" },
+      { name: "Carbon Filter", slug: "carbon-filter" },
+      { name: "Micro Filter", slug: "micro-filter" },
+    ],
+  },
+  {
+    id: "ppr-piping",
+    title: "PPR Piping",
+    slug: "ppr-piping",
+    icon: "ppr-piping",
+    products: [
+      { name: "PPR Piping Solutions", slug: "ppr-piping" },
+    ],
+  },
+  {
+    id: "spares",
+    title: "Compressor & Dryer Spares",
+    slug: "spares",
+    icon: "spares",
+    products: [
+      { name: "Compressor Spares", slug: "compressor-spares" },
+      { name: "Dryer Spares", slug: "dryer-spares" },
     ],
   },
 ];
 
 /**
- * Application filters offered on the catalog page.
- * `id` doubles as the value matched against `CatalogProduct.applications`.
+ * Family filters offered on the catalog page.
+ * `id` matches `CatalogProduct.family`.
  */
-export const productApplications: readonly {
-  readonly id: ProductApplication;
+export const productFamilies: readonly {
+  readonly id: ProductFamily;
   readonly label: string;
 }[] = [
-  { id: "manufacturing", label: "Manufacturing" },
-  { id: "pharmaceutical", label: "Pharmaceutical" },
-  { id: "oil-and-gas", label: "Oil & Gas" },
-  { id: "food-and-beverage", label: "Food & Beverage" },
+  { id: "air-compressors", label: "Air Compressors" },
+  { id: "air-dryers", label: "Air Dryers" },
+  { id: "air-filters", label: "Compressed Air Filters" },
+  { id: "ppr-piping", label: "PPR Piping" },
+  { id: "spares", label: "Compressor & Dryer Spares" },
 ];
 
 /**
@@ -76,68 +95,156 @@ export const productApplications: readonly {
 export const catalogProducts: readonly CatalogProduct[] = [
   {
     id: "reciprocating",
-    name: "Reciprocating",
+    name: "Reciprocating Air Compressors",
     slug: "reciprocating-air-compressor",
     badge: "Heavy Duty",
     description:
-      "Engineered for intermittent demand and rugged workshop environments. Features cast iron construction for maximum durability.",
+      "Built for intermittent workshop demand and rugged duty. Cast-iron construction for long life where the load is start-stop, not 24/7.",
     spec: "Starting at 5 HP",
     tone: "default",
-    applications: ["manufacturing", "oil-and-gas"],
+    family: "air-compressors",
   },
   {
-    id: "rotary-screw",
-    name: "Rotary Screw",
-    slug: "rotary-screw-air-compressor",
-    badge: "Continuous Duty",
+    id: "pm-motor-vfd",
+    name: "Direct Drive With PM Motor VFD",
+    slug: "direct-drive-pm-motor-vfd",
+    badge: "Energy Saving",
     description:
-      "Premium efficiency for 24/7 industrial operations. Low noise levels and advanced integrated controls for energy management.",
-    spec: "20 – 500 HP",
-    tone: "default",
-    applications: ["manufacturing", "oil-and-gas", "food-and-beverage"],
-  },
-  {
-    id: "oil-free",
-    name: "Oil-free",
-    slug: "oil-free-screw-compressor",
-    badge: "Oil Free",
-    description:
-      "Certified 100% oil-free air for pharmaceutical, food & beverage, and sensitive electronics manufacturing applications.",
-    spec: "TÜV Certified",
+      "Permanent-magnet motor with VFD, direct drive. Matches motor speed to air demand and cuts unloaded running that wastes kWh.",
+    spec: "PM motor + VFD",
     tone: "eco",
-    applications: ["pharmaceutical", "food-and-beverage", "manufacturing"],
+    family: "air-compressors",
   },
   {
-    id: "centrifugal",
-    name: "Centrifugal",
-    slug: "centrifugal-pump",
-    badge: "High Flow",
+    id: "base-mounted-screw",
+    name: "Base Mounted Screw Compressors",
+    slug: "base-mounted-screw-compressor",
+    badge: "SPR-SC",
     description:
-      "Optimized for high-volume, steady-state air requirements. Features multi-stage compression for superior thermodynamic efficiency.",
-    spec: "Up to 90,000 CFM",
+      "High-performance screw packages for continuous industrial operation. Low noise, heavy-duty construction, air or water cooled.",
+    spec: "5 – 500 HP · 20 – 2500 CFM",
     tone: "default",
-    applications: ["oil-and-gas", "manufacturing"],
+    family: "air-compressors",
   },
   {
-    id: "vsd-systems",
-    name: "VSD Systems",
-    slug: "vsd-screw-compressor",
-    badge: "Eco Efficient",
+    id: "tank-mounted",
+    name: "Tank Mounted Full Feature",
+    slug: "tank-mounted-full-feature",
+    badge: "Ready To Run",
     description:
-      "Variable Speed Drive technology that matches motor speed to air demand, reducing energy consumption by up to 35%.",
-    spec: "Smart Logic",
+      "Compressor, receiver, and treatment on one skid. A compact plant-air package for shops that need air without a separate compressor room.",
+    spec: "Integrated receiver",
+    tone: "default",
+    family: "air-compressors",
+  },
+  {
+    id: "high-pressure-16",
+    name: "High Pressure 16 Bar",
+    slug: "high-pressure-16-bar",
+    badge: "16 Bar",
+    description:
+      "High-pressure packages for processes that need more than plant air — testing, PET, and other 16 Bar(g) duties.",
+    spec: "16 Bar(g)",
+    tone: "default",
+    family: "air-compressors",
+  },
+  {
+    id: "refrigerated-dryer",
+    name: "Refrigerated Air Dryers",
+    slug: "refrigerated-air-dryer",
+    badge: "SPR-AD",
+    description:
+      "Removes moisture from plant air with a stable dew point. Compact, energy-efficient treatment for general manufacturing and pneumatic lines.",
+    spec: "20 – 2000 CFM · 2°C to 10°C",
+    tone: "default",
+    family: "air-dryers",
+  },
+  {
+    id: "desiccant-dryer",
+    name: "Desiccant Air Dryers",
+    slug: "desiccant-air-dryer",
+    badge: "SPR-DD",
+    description:
+      "Ultra-low dew point for critical applications. Heatless or heated regeneration with digital control where condensate is a quality event.",
+    spec: "20 – 1000 CFM · −40°C to −70°C",
     tone: "eco",
-    applications: ["manufacturing", "pharmaceutical", "food-and-beverage"],
+    family: "air-dryers",
   },
   {
-    id: "air-dryers",
-    name: "Air Dryers",
-    slug: "air-dryers",
-    badge: "Air Quality",
+    id: "pre-filter",
+    name: "Pre Filter",
+    slug: "pre-filter",
+    badge: "SPR-XF",
     description:
-      "Refrigerated and desiccant drying solutions to remove moisture and contaminants, protecting downstream equipment.",
-    spec: "-40°F Dewpoint",
+      "Removes bulk water, dust, and particles before the dryer so downstream equipment stays clean and the dryer is not overloaded.",
+    spec: "25 – 1500 CFM",
     tone: "default",
-    applications: ["pharmaceutical", "food-and-beverage", "oil-and-gas"],
+    family: "air-filters",
+  },
+  {
+    id: "after-filter",
+    name: "After Filter",
+    slug: "after-filter",
+    badge: "SPR-XF",
+    description:
+      "Removes oil and fine particles after generation and drying. The working grade for most plant-air lines.",
+    spec: "1 micron",
+    tone: "default",
+    family: "air-filters",
+  },
+  {
+    id: "carbon-filter",
+    name: "Carbon Filter",
+    slug: "carbon-filter",
+    badge: "SPR-XF",
+    description:
+      "Activated carbon for oil vapour and odours on product-contact or breathing-quality lines.",
+    spec: "Activated carbon",
+    tone: "eco",
+    family: "air-filters",
+  },
+  {
+    id: "micro-filter",
+    name: "Micro Filter",
+    slug: "micro-filter",
+    badge: "SPR-XF",
+    description:
+      "Removes 99.99% of particles down to 0.01 micron. Use where the process actually needs that class — not on every drop.",
+    spec: "0.01 micron",
+    tone: "default",
+    family: "air-filters",
+  },
+  {
+    id: "ppr-piping",
+    name: "PPR Piping Solutions",
+    slug: "ppr-piping",
+    badge: "SPR-PPR",
+    description:
+      "Complete PPR compressed-air piping for compressor rooms and plant headers. Leak-proof joints and a corrosion-free bore so the pressure you generate is the pressure the tool sees.",
+    spec: "Leak-proof · corrosion resistant",
+    tone: "default",
+    family: "ppr-piping",
+  },
+  {
+    id: "compressor-spares",
+    name: "Compressor Spares",
+    slug: "compressor-spares",
+    badge: "Genuine",
+    description:
+      "Oil filters, air filters, separators, belts, valves, O-rings, and gauges matched to SPR compressor packages.",
+    spec: "OEM-matched parts",
+    tone: "default",
+    family: "spares",
+  },
+  {
+    id: "dryer-spares",
+    name: "Dryer Spares",
+    slug: "dryer-spares",
+    badge: "Genuine",
+    description:
+      "Elements, drain parts, and service kits for refrigerated and desiccant dryers so treatment stays on dew point.",
+    spec: "SPR-AD · SPR-DD",
+    tone: "default",
+    family: "spares",
   },
 ];

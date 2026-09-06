@@ -5,7 +5,7 @@ import { ProductCatalog, ProductsHero } from "@/components/marketing/Products";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Explore SPR Air Systems product portfolio — compressors, dryers, and industrial air equipment.",
+    "SPR Air Systems product range — reciprocating and screw compressors, refrigerated and desiccant dryers, compressed air filters, PPR piping, and genuine spares.",
 };
 
 export default function ProductsPage() {

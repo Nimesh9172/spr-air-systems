@@ -1,18 +1,31 @@
 import type { Metadata } from "next";
 
-import { SamplePage } from "@/components/layout/SamplePage";
+import { AboutCTA } from "@/components/marketing/About";
+import {
+  SolutionsCategories,
+  SolutionsFilters,
+  SolutionsHero,
+  SolutionsLines,
+  SolutionsService,
+  SolutionsWhy,
+} from "@/components/marketing/Solutions";
 
 export const metadata: Metadata = {
   title: "Solutions",
   description:
-    "Industry solutions from SPR Air Systems for manufacturing, process, and high-demand environments.",
+    "Complete compressed air solutions from SPR Air Systems — SPR-SC screw compressors, dryers, filters, PPR piping, and genuine service support.",
 };
 
 export default function SolutionsPage() {
   return (
-    <SamplePage
-      title="Solutions"
-      description="Discover how SPR Air Systems supports industries with tailored compressed air solutions. Case studies and applications will live here."
-    />
+    <main>
+      <SolutionsHero />
+      <SolutionsCategories />
+      <SolutionsLines />
+      <SolutionsFilters />
+      <SolutionsService />
+      <SolutionsWhy />
+      <AboutCTA />
+    </main>
   );
 }

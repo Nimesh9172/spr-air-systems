@@ -14,6 +14,14 @@ export const defaultSeo: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-512x512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/favicon-512x512.png", type: "image/png" }],
+  },
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
   publisher: siteConfig.name,

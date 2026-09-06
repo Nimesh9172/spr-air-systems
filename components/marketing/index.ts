@@ -28,4 +28,12 @@ export {
   ProductCategories,
   ProductsHero,
 } from "@/components/marketing/Products";
+export {
+  SolutionsCategories,
+  SolutionsFilters,
+  SolutionsHero,
+  SolutionsLines,
+  SolutionsService,
+  SolutionsWhy,
+} from "@/components/marketing/Solutions";
 export { ValuePillars } from "@/components/marketing/ValuePillars";

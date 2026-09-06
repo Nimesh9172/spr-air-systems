@@ -37,11 +37,10 @@ const reducedItemVariants: Variants = {
   visible: { opacity: 1, transition: ITEM_TRANSITION },
 };
 
-const CERTIFICATIONS: { label: string; sub: string; accent?: boolean }[] = [
-  { label: "ISO", sub: "9001:2015" },
-  { label: "CE", sub: "CERTIFIED" },
+const STRENGTHS: { label: string; sub: string; accent?: boolean }[] = [
+  { label: "24/7", sub: "Support" },
   { label: "Energy", sub: "Efficient", accent: true },
-  { label: "OEM", sub: "OEM Support" },
+  { label: "OEM", sub: "Support" },
 ];
 
 const TEAM_ROLES: { icon: typeof UsersIcon; label: string }[] = [
@@ -53,7 +52,7 @@ const TEAM_ROLES: { icon: typeof UsersIcon; label: string }[] = [
 ];
 
 /**
- * About page credentials — certifications and team roles side by side.
+ * About page credentials — company strengths and team roles side by side.
  */
 export function AboutCredentials() {
   const prefersReducedMotion = useReducedMotion();
@@ -69,10 +68,10 @@ export function AboutCredentials() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.25 }}
         >
-          {/* Certifications */}
+          {/* Strengths */}
           <motion.div variants={item}>
             <h2 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-              Certifications
+              Our Strengths
             </h2>
             <div
               className="mt-3 h-0.5 w-10 rounded-full"
@@ -80,10 +79,10 @@ export function AboutCredentials() {
               aria-hidden
             />
 
-            <ul className="mt-7 grid grid-cols-4 gap-4">
-              {CERTIFICATIONS.map((cert) => (
+            <ul className="mt-7 grid grid-cols-3 gap-4">
+              {STRENGTHS.map((cert) => (
                 <li
-                  key={cert.label}
+                  key={`${cert.label}-${cert.sub}`}
                   className="flex flex-col items-center justify-center gap-1 rounded-xl border border-border/60 bg-[oklch(0.975_0.008_250)] px-3 py-5 text-center"
                 >
                   <span

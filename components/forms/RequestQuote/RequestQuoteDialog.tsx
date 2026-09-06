@@ -26,23 +26,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { COMPANY_STATS } from "@/constants/company";
+import { ENQUIRY_INTERESTS } from "@/constants/enquiry";
 import { cn } from "@/lib/utils";
 import { submitContact } from "@/services/contact.service";
 
 const ACCENT = "oklch(0.52 0.16 255)";
 
-const REQUIREMENTS = [
-  "Air Compressors",
-  "Screw Compressors",
-  "Pumps",
-  "Service & Maintenance",
-  "Custom System Design",
-  "Other",
-] as const;
-
 const WHY_CHOOSE: { icon: LucideIcon; label: string }[] = [
-  { icon: ShieldCheckIcon, label: "Trusted by 500+ Global Clients" },
-  { icon: AwardIcon, label: "25+ Years of Industry Experience" },
+  { icon: ShieldCheckIcon, label: `Trusted by ${COMPANY_STATS.happyClients}+ Clients` },
+  { icon: AwardIcon, label: `${COMPANY_STATS.yearsExperience}+ Years of Industry Experience` },
   { icon: HeadsetIcon, label: "Expert Support 24/7" },
 ];
 
@@ -244,7 +237,7 @@ export function RequestQuoteDialog({
                     <option value="" disabled>
                       Select your requirement
                     </option>
-                    {REQUIREMENTS.map((option) => (
+                    {ENQUIRY_INTERESTS.map((option) => (
                       <option key={option} value={option}>
                         {option}
                       </option>

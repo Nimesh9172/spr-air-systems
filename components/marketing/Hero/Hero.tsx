@@ -113,7 +113,7 @@ export function Hero() {
                   "h-11 rounded-md border-white/70 bg-transparent px-6 text-sm font-medium text-white hover:bg-white/10 hover:text-white",
                 )}
               >
-                Download Brochure
+                Contact Us
               </Link>
             </motion.div>
           </div>

@@ -8,6 +8,7 @@ import {
 
 import { AnimatedCounter } from "@/components/core/AnimatedCounter";
 import { Container } from "@/components/core/Container";
+import { COMPANY_STATS } from "@/constants/company";
 import { cn } from "@/lib/utils";
 
 const ACCENT = "oklch(0.52 0.16 255)";
@@ -21,19 +22,19 @@ const STATS: {
 }[] = [
   {
     icon: FactoryIcon,
-    value: 1500,
+    value: COMPANY_STATS.systemsInstalled,
     suffix: "+",
     label: "Systems Installed",
   },
   {
     icon: UsersIcon,
-    value: 1200,
+    value: COMPANY_STATS.happyClients,
     suffix: "+",
     label: "Happy Clients",
   },
   {
     icon: AwardIcon,
-    value: 20,
+    value: COMPANY_STATS.yearsExperience,
     suffix: "+",
     label: "Years of Experience",
   },

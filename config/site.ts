@@ -8,6 +8,6 @@ export const siteConfig = {
   name: COMPANY.name,
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sprairsystems.com",
   description:
-    "SPR Air Systems delivers industrial air systems, compressed air solutions, and process equipment for modern manufacturing.",
+    "SPR Air Systems delivers compressed air systems — compressors, dryers, filters, PPR piping, and genuine service support for modern industry.",
   company: COMPANY,
 } as const satisfies SiteConfig;
