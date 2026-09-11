@@ -11,6 +11,7 @@ export type {
   SolutionCategory,
   SolutionIconKey,
   SolutionLine,
+  SolutionLink,
   SolutionServiceItem,
   SolutionSpec,
 } from "@/types/solution";
@@ -25,6 +26,7 @@ export type {
   ProductCategoryIcon,
   ProductCategoryItem,
   ProductFamily,
+  ProductSpec,
   ProductTone,
 } from "@/types/product";
 export type {

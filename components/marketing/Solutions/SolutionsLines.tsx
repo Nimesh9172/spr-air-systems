@@ -1,11 +1,15 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowRightIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
 import { SOLUTION_ICONS } from "@/components/marketing/Solutions/icons";
 import { solutionLines } from "@/data/solutions";
+import { cn } from "@/lib/utils";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.5, ease: EASE_OUT } as const;
@@ -76,7 +80,8 @@ export function SolutionsLines() {
             variants={item}
           >
             The SPR series — reciprocating and screw compressors, refrigerated
-            and desiccant dryers, filters, condensate handling, and PPR piping.
+            and desiccant dryers, filters, and condensate handling. Open a line
+            to see the matching product and specs.
           </motion.p>
         </motion.div>
 
@@ -89,24 +94,52 @@ export function SolutionsLines() {
         >
           {solutionLines.map((line) => {
             const Icon = SOLUTION_ICONS[line.icon];
+            const cardClassName =
+              "group/card flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_8px_28px_-18px_oklch(0.26_0.09_260_/_20%)] outline-none transition-shadow duration-500 hover:shadow-[0_18px_40px_-16px_oklch(0.35_0.08_255_/_0.26)] focus-visible:shadow-[0_18px_40px_-16px_oklch(0.35_0.08_255_/_0.26)]";
 
-            return (
-              <motion.li
-                key={line.id}
-                variants={item}
-                className="flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-white shadow-[0_8px_28px_-18px_oklch(0.26_0.09_260_/_20%)]"
-              >
-                <div className="flex flex-1 flex-col p-6 sm:p-7">
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[oklch(0.94_0.03_250)] text-[oklch(0.5_0.16_255)]">
-                      <Icon className="size-5" aria-hidden strokeWidth={1.75} />
-                    </span>
-                    <span className="rounded-md bg-[oklch(0.52_0.16_255)] px-2.5 py-1 text-[0.625rem] font-bold tracking-[0.1em] text-white uppercase">
+            const body = (
+              <>
+                {line.image ? (
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[oklch(0.985_0.005_250)]">
+                    <Image
+                      src={line.image}
+                      alt={line.imageAlt ?? line.name}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className={cn(
+                        "object-contain object-center p-5 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                        !prefersReducedMotion &&
+                          "group-hover/card:scale-[1.03]",
+                      )}
+                    />
+                    <span className="absolute top-3 right-3 rounded-md bg-[oklch(0.52_0.16_255)] px-2.5 py-1 text-[0.625rem] font-bold tracking-[0.1em] text-white uppercase">
                       {line.series}
                     </span>
                   </div>
+                ) : null}
 
-                  <h3 className="mt-5 text-lg font-bold tracking-tight text-foreground">
+                <div className="flex flex-1 flex-col p-6 sm:p-7">
+                  {line.image ? null : (
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[oklch(0.94_0.03_250)] text-[oklch(0.5_0.16_255)]">
+                        <Icon
+                          className="size-5"
+                          aria-hidden
+                          strokeWidth={1.75}
+                        />
+                      </span>
+                      <span className="rounded-md bg-[oklch(0.52_0.16_255)] px-2.5 py-1 text-[0.625rem] font-bold tracking-[0.1em] text-white uppercase">
+                        {line.series}
+                      </span>
+                    </div>
+                  )}
+
+                  <h3
+                    className={cn(
+                      "text-lg font-bold tracking-tight text-foreground",
+                      line.image ? "mt-0" : "mt-5",
+                    )}
+                  >
                     {line.name}
                   </h3>
                   <div
@@ -145,10 +178,71 @@ export function SolutionsLines() {
                     </div>
                   ))}
                 </dl>
+
+                {line.link ? (
+                  <div className="flex items-center justify-between gap-3 border-t border-border/70 px-5 py-3.5 sm:px-6">
+                    <span className="text-[0.65rem] font-semibold tracking-[0.1em] text-muted-foreground uppercase">
+                      {line.link.href.startsWith("/products/")
+                        ? "Product specs"
+                        : "Next step"}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[oklch(0.5_0.16_255)]">
+                      {line.link.label}
+                      <ArrowRightIcon
+                        className={cn(
+                          "size-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                          !prefersReducedMotion &&
+                            "group-hover/card:translate-x-0.5 group-focus-visible/card:translate-x-0.5",
+                        )}
+                        aria-hidden
+                      />
+                    </span>
+                  </div>
+                ) : null}
+              </>
+            );
+
+            return (
+              <motion.li key={line.id} variants={item} className="h-full">
+                {line.link ? (
+                  <Link
+                    href={line.link.href}
+                    aria-label={`${line.link.label}: ${line.name}`}
+                    className={cardClassName}
+                  >
+                    {body}
+                  </Link>
+                ) : (
+                  <div className={cardClassName}>{body}</div>
+                )}
               </motion.li>
             );
           })}
         </motion.ul>
+
+        <motion.div
+          className="mt-10 flex justify-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.6 }}
+        >
+          <motion.div variants={item}>
+            <Link
+              href="/products"
+              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[oklch(0.5_0.16_255)] outline-none transition-opacity hover:opacity-80 focus-visible:underline"
+            >
+              Browse full product catalog
+              <ArrowRightIcon
+                className={cn(
+                  "size-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                  !prefersReducedMotion && "group-hover:translate-x-0.5",
+                )}
+                aria-hidden
+              />
+            </Link>
+          </motion.div>
+        </motion.div>
       </Container>
     </Section>
   );

@@ -2,16 +2,19 @@
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
+  ArrowRightIcon,
   ClipboardCheckIcon,
   HeadsetIcon,
   PackageIcon,
   WrenchIcon,
   type LucideIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
 import { solutionServices } from "@/data/solutions";
+import { cn } from "@/lib/utils";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.55, ease: EASE_OUT } as const;
@@ -104,13 +107,11 @@ export function SolutionsService() {
         >
           {solutionServices.map((service, index) => {
             const Icon = SERVICE_ICONS[index] ?? HeadsetIcon;
+            const cardClassName =
+              "group/card flex h-full flex-col rounded-2xl border border-border/60 bg-white p-6 outline-none transition-shadow duration-500 hover:shadow-[0_14px_32px_-18px_oklch(0.35_0.08_255_/_0.28)] focus-visible:shadow-[0_14px_32px_-18px_oklch(0.35_0.08_255_/_0.28)]";
 
-            return (
-              <motion.li
-                key={service.id}
-                variants={item}
-                className="flex h-full flex-col rounded-2xl border border-border/60 bg-white p-6"
-              >
+            const body = (
+              <>
                 <span className="flex size-12 items-center justify-center rounded-full bg-[oklch(0.94_0.03_250)] text-[oklch(0.5_0.16_255)]">
                   <Icon className="size-5" aria-hidden strokeWidth={1.75} />
                 </span>
@@ -122,9 +123,38 @@ export function SolutionsService() {
                   style={{ backgroundColor: ACCENT }}
                   aria-hidden
                 />
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {service.description}
                 </p>
+                {service.link ? (
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-[oklch(0.5_0.16_255)]">
+                    {service.link.label}
+                    <ArrowRightIcon
+                      className={cn(
+                        "size-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                        !prefersReducedMotion &&
+                          "group-hover/card:translate-x-0.5 group-focus-visible/card:translate-x-0.5",
+                      )}
+                      aria-hidden
+                    />
+                  </span>
+                ) : null}
+              </>
+            );
+
+            return (
+              <motion.li key={service.id} variants={item} className="h-full">
+                {service.link ? (
+                  <Link
+                    href={service.link.href}
+                    aria-label={`${service.link.label}: ${service.title}`}
+                    className={cardClassName}
+                  >
+                    {body}
+                  </Link>
+                ) : (
+                  <div className={cardClassName}>{body}</div>
+                )}
               </motion.li>
             );
           })}

@@ -1,6 +1,8 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowRightIcon } from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
@@ -11,6 +13,7 @@ import type { FilterGradeTone } from "@/types/solution";
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.5, ease: EASE_OUT } as const;
 const ACCENT = "oklch(0.52 0.16 255)";
+const FILTERS_HREF = "/products/compressed-air-filters";
 
 const TONE: Record<FilterGradeTone, string> = {
   blue: "bg-[oklch(0.55_0.16_250)]",
@@ -79,9 +82,9 @@ export function SolutionsFilters() {
             className="mt-5 text-base leading-relaxed text-muted-foreground sm:text-lg"
             variants={item}
           >
-            Four filter grades to match the process. Use the coarsest
-            grade that still protects the line — over-filtering every drop
-            wastes pressure and elements.
+            Four filter grades in one SPR-XF product. Use the coarsest grade
+            that still protects the line — over-filtering every drop wastes
+            pressure and elements.
           </motion.p>
         </motion.div>
 
@@ -92,28 +95,70 @@ export function SolutionsFilters() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
         >
-          {filterGrades.map((grade) => (
-              <motion.li
-                key={grade.id}
-                variants={item}
-                className="relative overflow-hidden rounded-2xl border border-border/60 bg-[oklch(0.975_0.008_250)] p-6"
-              >
-                <span
-                  aria-hidden
-                  className={cn(
-                    "absolute inset-y-0 left-0 w-1.5",
-                    TONE[grade.tone],
-                  )}
-                />
-                <h3 className="text-base font-bold tracking-tight text-foreground">
-                  {grade.name}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {grade.role}
-                </p>
+          {filterGrades.map((grade) => {
+            const href = grade.link?.href ?? FILTERS_HREF;
+            const label = grade.link?.label ?? "View product";
+
+            return (
+              <motion.li key={grade.id} variants={item} className="h-full">
+                <Link
+                  href={href}
+                  aria-label={`${label}: ${grade.name}`}
+                  className="group/card relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-[oklch(0.975_0.008_250)] p-6 outline-none transition-shadow duration-500 hover:shadow-[0_14px_32px_-18px_oklch(0.35_0.08_255_/_0.28)] focus-visible:shadow-[0_14px_32px_-18px_oklch(0.35_0.08_255_/_0.28)]"
+                >
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "absolute inset-y-0 left-0 w-1.5",
+                      TONE[grade.tone],
+                    )}
+                  />
+                  <h3 className="text-base font-bold tracking-tight text-foreground">
+                    {grade.name}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                    {grade.role}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[oklch(0.5_0.16_255)]">
+                    {label}
+                    <ArrowRightIcon
+                      className={cn(
+                        "size-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                        !prefersReducedMotion &&
+                          "group-hover/card:translate-x-0.5 group-focus-visible/card:translate-x-0.5",
+                      )}
+                      aria-hidden
+                    />
+                  </span>
+                </Link>
               </motion.li>
-          ))}
+            );
+          })}
         </motion.ul>
+
+        <motion.div
+          className="mt-8 flex justify-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.6 }}
+        >
+          <motion.div variants={item}>
+            <Link
+              href={FILTERS_HREF}
+              className="group inline-flex items-center gap-1.5 text-sm font-semibold text-[oklch(0.5_0.16_255)] outline-none transition-opacity hover:opacity-80 focus-visible:underline"
+            >
+              Open Compressed Air Filters product
+              <ArrowRightIcon
+                className={cn(
+                  "size-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                  !prefersReducedMotion && "group-hover:translate-x-0.5",
+                )}
+                aria-hidden
+              />
+            </Link>
+          </motion.div>
+        </motion.div>
       </Container>
     </Section>
   );

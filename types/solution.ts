@@ -13,11 +13,18 @@ export type SolutionIconKey =
   | "filter"
   | "separator";
 
+/** Optional deep link into the product catalog or contact flow. */
+export type SolutionLink = {
+  readonly href: string;
+  readonly label: string;
+};
+
 export type SolutionCategory = {
   readonly id: string;
   readonly title: string;
   readonly icon: SolutionIconKey;
   readonly description: string;
+  readonly link?: SolutionLink;
 };
 
 export type SolutionSpec = {
@@ -33,6 +40,10 @@ export type SolutionLine = {
   readonly description: string;
   readonly features: readonly string[];
   readonly specs: readonly SolutionSpec[];
+  readonly link?: SolutionLink;
+  /** Optional product photo shown on the Solutions line card. */
+  readonly image?: string;
+  readonly imageAlt?: string;
 };
 
 export type FilterGradeTone = "blue" | "green" | "red" | "silver";
@@ -42,10 +53,12 @@ export type FilterGrade = {
   readonly name: string;
   readonly tone: FilterGradeTone;
   readonly role: string;
+  readonly link?: SolutionLink;
 };
 
 export type SolutionServiceItem = {
   readonly id: string;
   readonly title: string;
   readonly description: string;
+  readonly link?: SolutionLink;
 };

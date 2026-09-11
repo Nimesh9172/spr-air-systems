@@ -28,9 +28,7 @@ const CATEGORY_ICONS: Record<ProductCategoryIcon, LucideIcon> = {
   spares: PackageIcon,
 };
 
-/** Homepage links point at the catalog; deep links can use the slugs later. */
-const CATEGORY_HREF = "/products";
-
+/** Homepage product cards deep-link to each product detail page. */
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.6, ease: EASE_OUT } as const;
 const ACCENT = "oklch(0.52 0.16 255)";
@@ -173,7 +171,7 @@ export function ProductCategories() {
                   </div>
 
                   <Link
-                    href={CATEGORY_HREF}
+                    href="/products"
                     className="group/view inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-[oklch(0.5_0.16_255)] outline-none transition-opacity hover:opacity-80 focus-visible:opacity-80"
                   >
                     View All
@@ -209,7 +207,7 @@ export function ProductCategories() {
                         }}
                       >
                         <Link
-                          href={CATEGORY_HREF}
+                          href={`/products/${product.slug}`}
                           aria-label={`View ${product.name}`}
                           className="group/card flex flex-col overflow-hidden rounded-xl border border-border/60 bg-white shadow-[0_8px_28px_-18px_oklch(0.26_0.09_260_/_24%)] outline-none transition-shadow duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_18px_40px_-16px_oklch(0.35_0.08_255_/_0.26)] focus-visible:shadow-[0_18px_40px_-16px_oklch(0.35_0.08_255_/_0.26)]"
                         >

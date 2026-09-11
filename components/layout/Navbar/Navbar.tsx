@@ -37,12 +37,12 @@ export function Navbar() {
           className="relative z-10 shrink-0"
         >
           <Image
-            src="/logos/logo-dark1.png"
+            src="/logos/logo-dark2.png"
             alt={siteConfig.name}
-            width={1850}
-            height={973}
+            width={200}
+            height={200}
             priority
-            className="h-11 w-auto object-contain scale-[2]"
+            className="h-11 w-auto object-contain scale-[1.5]"
           />
         </Link>
 

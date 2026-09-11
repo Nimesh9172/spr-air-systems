@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { ProductCatalog, ProductsHero } from "@/components/marketing/Products";
 import { JsonLd } from "@/components/seo";
@@ -32,7 +33,9 @@ export default function ProductsPage() {
         ]}
       />
       <ProductsHero />
-      <ProductCatalog />
+      <Suspense fallback={null}>
+        <ProductCatalog />
+      </Suspense>
     </main>
   );
 }

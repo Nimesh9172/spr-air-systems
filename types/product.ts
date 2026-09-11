@@ -47,11 +47,16 @@ export type ProductFamily =
   | "ppr-piping"
   | "spares";
 
-/**
- * Visual emphasis for catalog badges and spec labels.
+/** Visual emphasis for catalog badges and spec labels.
  * `eco` maps to the success/green tone, `default` to the brand blue.
  */
 export type ProductTone = "default" | "eco";
+
+/** A labelled specification row on a product detail page. */
+export type ProductSpec = {
+  readonly label: string;
+  readonly value: string;
+};
 
 /** A catalog entry rendered as a card on the /products page. */
 export type CatalogProduct = {
@@ -66,4 +71,13 @@ export type CatalogProduct = {
   readonly family: ProductFamily;
   readonly image?: string;
   readonly imageAlt?: string;
+  /**
+   * How the image fills the catalog card frame on `/products`.
+   * Default is cover; use `contain` for tall product shots that would otherwise crop.
+   */
+  readonly catalogImageFit?: "cover" | "contain";
+  /** Feature bullets shown on the product detail page. */
+  readonly features?: readonly string[];
+  /** Spec table rows shown on the product detail page. */
+  readonly specs?: readonly ProductSpec[];
 };

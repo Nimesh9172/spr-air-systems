@@ -10,6 +10,26 @@ const nextConfig: NextConfig = {
         destination: "/solutions",
         permanent: true,
       },
+      {
+        source: "/products/pre-filter",
+        destination: "/products/compressed-air-filters",
+        permanent: true,
+      },
+      {
+        source: "/products/after-filter",
+        destination: "/products/compressed-air-filters",
+        permanent: true,
+      },
+      {
+        source: "/products/carbon-filter",
+        destination: "/products/compressed-air-filters",
+        permanent: true,
+      },
+      {
+        source: "/products/micro-filter",
+        destination: "/products/compressed-air-filters",
+        permanent: true,
+      },
     ];
   },
 };

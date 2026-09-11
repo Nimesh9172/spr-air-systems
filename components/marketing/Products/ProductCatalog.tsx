@@ -4,7 +4,8 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRightIcon, CheckIcon, CylinderIcon, HeadsetIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
@@ -18,6 +19,15 @@ const ACCENT = "oklch(0.52 0.16 255)";
 
 const ALL = "all" as const;
 type FilterValue = typeof ALL | ProductFamily;
+
+const FAMILY_IDS = new Set(productFamilies.map((family) => family.id));
+
+function parseFamilyParam(value: string | null): FilterValue {
+  if (value && FAMILY_IDS.has(value as ProductFamily)) {
+    return value as ProductFamily;
+  }
+  return ALL;
+}
 
 const containerVariants: Variants = {
   hidden: {},
@@ -54,11 +64,20 @@ const toneClass = {
 /**
  * Products catalog — application filter sidebar with a responsive product grid.
  * Content comes from `@/data/products`; swap for an API fetch later.
+ * Deep-link with `?family=air-compressors` (etc.) from the Solutions page.
  */
 export function ProductCatalog() {
   const prefersReducedMotion = useReducedMotion();
   const item = prefersReducedMotion ? reducedItemVariants : itemVariants;
-  const [filter, setFilter] = useState<FilterValue>(ALL);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [filter, setFilter] = useState<FilterValue>(() =>
+    parseFamilyParam(searchParams.get("family")),
+  );
+
+  useEffect(() => {
+    setFilter(parseFamilyParam(searchParams.get("family")));
+  }, [searchParams]);
 
   const visibleProducts = useMemo(
     () =>
@@ -67,6 +86,20 @@ export function ProductCatalog() {
         : catalogProducts.filter((p) => p.family === filter),
     [filter],
   );
+
+  function selectFilter(next: FilterValue) {
+    setFilter(next);
+    const params = new URLSearchParams(searchParams.toString());
+    if (next === ALL) {
+      params.delete("family");
+    } else {
+      params.set("family", next);
+    }
+    const query = params.toString();
+    router.replace(query ? `/products?${query}` : "/products", {
+      scroll: false,
+    });
+  }
 
   return (
     <Section
@@ -92,14 +125,14 @@ export function ProductCatalog() {
                 <FilterOption
                   label="All Products"
                   checked={filter === ALL}
-                  onSelect={() => setFilter(ALL)}
+                  onSelect={() => selectFilter(ALL)}
                 />
                 {productFamilies.map((family) => (
                   <FilterOption
                     key={family.id}
                     label={family.label}
                     checked={filter === family.id}
-                    onSelect={() => setFilter(family.id)}
+                    onSelect={() => selectFilter(family.id)}
                   />
                 ))}
               </ul>
@@ -173,7 +206,7 @@ export function ProductCatalog() {
                     }}
                   >
                     <Link
-                      href="/contact"
+                      href={`/products/${product.slug}`}
                       aria-label={`View specifications for ${product.name}`}
                       className="group/card flex h-full flex-col overflow-hidden rounded-xl border border-border/60 bg-white shadow-[0_8px_28px_-18px_oklch(0.26_0.09_260_/_24%)] outline-none transition-shadow duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_18px_40px_-16px_oklch(0.35_0.08_255_/_0.26)] focus-visible:shadow-[0_18px_40px_-16px_oklch(0.35_0.08_255_/_0.26)]"
                     >
@@ -186,7 +219,10 @@ export function ProductCatalog() {
                             fill
                             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                             className={cn(
-                              "object-cover object-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                              "object-center transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                              product.catalogImageFit === "contain"
+                                ? "object-contain p-3 sm:p-4"
+                                : "object-cover",
                               !prefersReducedMotion &&
                                 "group-hover/card:scale-[1.03]",
                             )}

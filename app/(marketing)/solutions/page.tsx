@@ -6,6 +6,7 @@ import {
   SolutionsFilters,
   SolutionsHero,
   SolutionsLines,
+  SolutionsPiping,
   SolutionsService,
   SolutionsWhy,
 } from "@/components/marketing/Solutions";
@@ -40,6 +41,7 @@ export default function SolutionsPage() {
       />
       <SolutionsHero />
       <SolutionsCategories />
+      <SolutionsPiping />
       <SolutionsLines />
       <SolutionsFilters />
       <SolutionsService />

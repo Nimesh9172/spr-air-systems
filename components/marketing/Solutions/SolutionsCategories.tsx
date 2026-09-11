@@ -1,11 +1,14 @@
 "use client";
 
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowRightIcon } from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
 import { SOLUTION_ICONS } from "@/components/marketing/Solutions/icons";
 import { solutionCategories } from "@/data/solutions";
+import { cn } from "@/lib/utils";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.55, ease: EASE_OUT } as const;
@@ -90,13 +93,11 @@ export function SolutionsCategories() {
         >
           {solutionCategories.map((category) => {
             const Icon = SOLUTION_ICONS[category.icon];
+            const cardClassName =
+              "group/card flex h-full flex-col rounded-2xl border border-border/60 bg-[oklch(0.975_0.008_250)] p-6 outline-none transition-shadow duration-500 hover:shadow-[0_14px_32px_-18px_oklch(0.35_0.08_255_/_0.28)] focus-visible:shadow-[0_14px_32px_-18px_oklch(0.35_0.08_255_/_0.28)]";
 
-            return (
-              <motion.li
-                key={category.id}
-                variants={item}
-                className="flex h-full flex-col rounded-2xl border border-border/60 bg-[oklch(0.975_0.008_250)] p-6"
-              >
+            const body = (
+              <>
                 <span className="flex size-12 items-center justify-center rounded-full bg-white text-[oklch(0.5_0.16_255)] shadow-[0_8px_20px_-12px_oklch(0.52_0.16_255_/_0.45)]">
                   <Icon className="size-5" aria-hidden strokeWidth={1.75} />
                 </span>
@@ -108,9 +109,34 @@ export function SolutionsCategories() {
                   style={{ backgroundColor: ACCENT }}
                   aria-hidden
                 />
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {category.description}
                 </p>
+                {category.link ? (
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-[oklch(0.5_0.16_255)]">
+                    {category.link.label}
+                    <ArrowRightIcon
+                      className={cn(
+                        "size-3.5 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                        !prefersReducedMotion &&
+                          "group-hover/card:translate-x-0.5 group-focus-visible/card:translate-x-0.5",
+                      )}
+                      aria-hidden
+                    />
+                  </span>
+                ) : null}
+              </>
+            );
+
+            return (
+              <motion.li key={category.id} variants={item} className="h-full">
+                {category.link ? (
+                  <Link href={category.link.href} className={cardClassName}>
+                    {body}
+                  </Link>
+                ) : (
+                  <div className={cardClassName}>{body}</div>
+                )}
               </motion.li>
             );
           })}
