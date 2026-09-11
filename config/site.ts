@@ -6,8 +6,9 @@ import type { SiteConfig } from "@/types/site";
  */
 export const siteConfig = {
   name: COMPANY.name,
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sprairsystems.com",
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.spr-airsystems.in",
   description:
-    "SPR Air Systems delivers compressed air systems — compressors, dryers, filters, PPR piping, and genuine service support for modern industry.",
+    "SPR Air Systems in Vasai East, Palghar supplies industrial air compressors, refrigerated and desiccant dryers, compressed air filters, PPR piping, and genuine compressor and dryer spares.",
   company: COMPANY,
 } as const satisfies SiteConfig;

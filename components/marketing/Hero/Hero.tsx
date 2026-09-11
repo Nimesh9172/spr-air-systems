@@ -46,7 +46,6 @@ export function Hero() {
       className="relative isolate flex min-h-[min(78vh,52rem)] items-center overflow-hidden"
     >
       <motion.div
-        aria-hidden
         className="absolute inset-0"
         initial={prefersReducedMotion ? false : { scale: 1.2 }}
         animate={prefersReducedMotion ? undefined : { scale: 1 }}
@@ -54,7 +53,7 @@ export function Hero() {
       >
         <Image
           src="/images/hero.png"
-          alt=""
+          alt="SPR Air Systems VFD compressor and air receiver in an industrial facility"
           fill
           priority
           sizes="100vw"

@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 
 import { siteConfig } from "@/config/site";
+import { HOME_TITLE, SEO_IMAGE } from "@/lib/seo";
+
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 /**
  * Shared SEO and viewport defaults for the root layout.
@@ -9,7 +12,7 @@ import { siteConfig } from "@/config/site";
 export const defaultSeo: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: siteConfig.name,
+    default: HOME_TITLE,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -25,18 +28,23 @@ export const defaultSeo: Metadata = {
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
   publisher: siteConfig.name,
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_IN",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: siteConfig.name,
+    title: HOME_TITLE,
     description: siteConfig.description,
+    images: [SEO_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: HOME_TITLE,
     description: siteConfig.description,
+    images: [SEO_IMAGE.url],
   },
   robots: {
     index: true,
@@ -49,6 +57,9 @@ export const defaultSeo: Metadata = {
       "max-snippet": -1,
     },
   },
+  ...(googleVerification
+    ? { verification: { google: googleVerification } }
+    : {}),
 };
 
 /**

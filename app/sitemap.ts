@@ -1,18 +1,17 @@
 import type { MetadataRoute } from "next";
 
-import { siteConfig } from "@/config/site";
+import { absoluteUrl, MARKETING_ROUTES } from "@/lib/seo";
 
 /**
  * Programmatic sitemap for search engine indexing.
- * Extend with marketing routes and dynamic entries from services as pages are added.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: siteConfig.url,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-  ];
+  const lastModified = new Date();
+
+  return MARKETING_ROUTES.map((route) => ({
+    url: absoluteUrl(route.path),
+    lastModified,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+  }));
 }

@@ -22,7 +22,6 @@ const QUICK_LINKS_RIGHT = [
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
   { label: "Request Quote", href: "/contact" },
-  { label: "Privacy Policy", href: "/privacy" },
 ] as const;
 
 /**

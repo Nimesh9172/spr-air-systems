@@ -79,8 +79,8 @@ export function ProductsHero() {
               className="mt-4 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-[2.75rem] lg:leading-[1.15]"
               variants={item}
             >
-              Industrial Compressed Air{" "}
-              <span className="text-[oklch(0.52_0.16_255)]">Equipment</span>
+              Industrial Air Compressors,{" "}
+              <span className="text-[oklch(0.52_0.16_255)]">Dryers & Filters</span>
             </motion.h1>
 
             <motion.p

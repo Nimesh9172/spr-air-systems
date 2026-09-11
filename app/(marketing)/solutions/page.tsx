@@ -9,16 +9,35 @@ import {
   SolutionsService,
   SolutionsWhy,
 } from "@/components/marketing/Solutions";
+import { JsonLd } from "@/components/seo";
+import { breadcrumbJsonLd, pageSeo, webPageJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Solutions",
-  description:
-    "Complete compressed air solutions from SPR Air Systems — SPR-SC screw compressors, dryers, filters, PPR piping, and genuine service support.",
-};
+const TITLE = "Compressed Air System Solutions in Maharashtra";
+const DESCRIPTION =
+  "Specify a complete compressed air system with SPR-SC screw compressors (5–500 HP), refrigerated and desiccant dryers, SPR-XF filters, PPR piping, and after-sales support from Vasai.";
+
+export const metadata: Metadata = pageSeo({
+  title: TITLE,
+  description: DESCRIPTION,
+  path: "/solutions",
+});
 
 export default function SolutionsPage() {
   return (
     <main>
+      <JsonLd
+        data={[
+          webPageJsonLd({
+            path: "/solutions",
+            name: TITLE,
+            description: DESCRIPTION,
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Solutions", path: "/solutions" },
+          ]),
+        ]}
+      />
       <SolutionsHero />
       <SolutionsCategories />
       <SolutionsLines />
