@@ -18,12 +18,17 @@ export const defaultSeo: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   icons: {
+    // Google prefers favicons sized in multiples of 48px.
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
       { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-512x512.png", type: "image/png", sizes: "512x512" },
+      { url: "/favicon-48x48.png", type: "image/png", sizes: "48x48" },
+      { url: "/favicon-96x96.png", type: "image/png", sizes: "96x96" },
+      { url: "/favicon-192x192.png", type: "image/png", sizes: "192x192" },
     ],
-    apple: [{ url: "/favicon-512x512.png", type: "image/png" }],
+    apple: [
+      { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+    ],
   },
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
