@@ -14,6 +14,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
+import { toast } from "sonner";
 
 import { Container } from "@/components/core/Container";
 import { Section } from "@/components/core/Section";
@@ -23,7 +24,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { COMPANY, COMPANY_ADDRESS_TEXT } from "@/constants/company";
 import { ENQUIRY_INTERESTS } from "@/constants/enquiry";
 import { cn } from "@/lib/utils";
-import { submitContact } from "@/services/contact.service";
+import {
+  getEnquiryErrorMessage,
+  submitContact,
+} from "@/services/contact.service";
 
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.6, ease: EASE_OUT } as const;
@@ -90,10 +94,18 @@ export function GetInTouch() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmitting) return;
+
+    const form = event.currentTarget;
     setIsSubmitting(true);
     try {
-      await submitContact();
-      event.currentTarget.reset();
+      await submitContact(new FormData(form), "Homepage Enquiry");
+      form.reset();
+      toast.success(
+        "Thank you. Your enquiry has been submitted. Our team will get back to you shortly.",
+      );
+    } catch (error) {
+      toast.error(getEnquiryErrorMessage(error));
     } finally {
       setIsSubmitting(false);
     }

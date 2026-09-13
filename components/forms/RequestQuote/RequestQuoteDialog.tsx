@@ -18,6 +18,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useState, type FormEvent, type ReactElement, type ReactNode } from "react";
+import { toast } from "sonner";
 
 import {
   Dialog,
@@ -29,7 +30,10 @@ import {
 import { COMPANY_STATS } from "@/constants/company";
 import { ENQUIRY_INTERESTS } from "@/constants/enquiry";
 import { cn } from "@/lib/utils";
-import { submitContact } from "@/services/contact.service";
+import {
+  getEnquiryErrorMessage,
+  submitContact,
+} from "@/services/contact.service";
 
 const ACCENT = "oklch(0.52 0.16 255)";
 
@@ -62,11 +66,19 @@ export function RequestQuoteDialog({
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isSubmitting) return;
+
+    const form = event.currentTarget;
     setIsSubmitting(true);
     try {
-      await submitContact();
-      event.currentTarget.reset();
+      await submitContact(new FormData(form), "Request a Quote");
+      form.reset();
       onOpenChange?.(false);
+      toast.success(
+        "Thank you. Your quote request has been submitted. Our experts will get back to you with the best solution and pricing.",
+      );
+    } catch (error) {
+      toast.error(getEnquiryErrorMessage(error));
     } finally {
       setIsSubmitting(false);
     }
