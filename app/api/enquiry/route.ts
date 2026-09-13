@@ -16,16 +16,8 @@ const FROM_ADDRESS = "Website Enquiry <enquiry@spr-airsystems.in>";
 const GENERIC_ERROR = "Unable to send your enquiry. Please try again.";
 const RATE_LIMIT_ERROR =
   "Too many enquiries were submitted. Please wait a few minutes and try again.";
-const MAX_ATTACHMENT_BYTES = 5 * 1024 * 1024;
 const REQUEST_WINDOW_MS = 10 * 60 * 1000;
 const SEND_WINDOW_MS = 15 * 60 * 1000;
-const ALLOWED_ATTACHMENT_EXTENSIONS = new Set([
-  ".pdf",
-  ".doc",
-  ".docx",
-  ".jpg",
-  ".jpeg",
-]);
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -82,11 +74,6 @@ export async function POST(request: Request) {
 
   const fields = parseEnquiryFields(formData);
   const source = readStringField(formData, "source");
-  const attachment = await readAttachment(formData.get("attachment"));
-
-  if (attachment && "error" in attachment) {
-    return NextResponse.json({ error: attachment.error }, { status: 400 });
-  }
 
   const apiKey = process.env.RESEND_API_KEY;
   const receiverEmail = process.env.ENQUIRY_RECEIVER_EMAIL?.trim();
@@ -97,7 +84,6 @@ export async function POST(request: Request) {
   }
 
   const { html, text } = buildEnquiryEmail(fields, {
-    attachmentName: attachment?.filename,
     source,
     replyTo: email,
   });
@@ -110,15 +96,6 @@ export async function POST(request: Request) {
     subject: buildEnquirySubject(source, fullName),
     html,
     text,
-    attachments: attachment
-      ? [
-          {
-            filename: attachment.filename,
-            content: attachment.content,
-            contentType: attachment.contentType,
-          },
-        ]
-      : undefined,
   });
 
   if (error) {
@@ -147,38 +124,4 @@ function splitRecipients(value: string): string | string[] {
 
   if (recipients.length === 0) return value;
   return recipients.length === 1 ? recipients[0] : recipients;
-}
-
-async function readAttachment(value: FormDataEntryValue | null): Promise<
-  | { filename: string; content: Buffer; contentType?: string }
-  | { error: string }
-  | null
-> {
-  if (!(value instanceof File) || value.size === 0 || !value.name) {
-    return null;
-  }
-
-  if (value.size > MAX_ATTACHMENT_BYTES) {
-    return { error: "File must be 5MB or smaller." };
-  }
-
-  const extension = getFileExtension(value.name);
-  if (!ALLOWED_ATTACHMENT_EXTENSIONS.has(extension)) {
-    return { error: "Please upload a PDF, DOC, DOCX, or JPG file." };
-  }
-
-  const filename =
-    value.name.replace(/[/\\]/g, "").slice(0, 120) || "attachment";
-
-  return {
-    filename,
-    content: Buffer.from(await value.arrayBuffer()),
-    contentType: value.type || undefined,
-  };
-}
-
-function getFileExtension(filename: string): string {
-  const index = filename.lastIndexOf(".");
-  if (index === -1) return "";
-  return filename.slice(index).toLowerCase();
 }

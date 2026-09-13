@@ -22,7 +22,6 @@ const FIELD_LABELS: Record<string, string> = {
   source: "Form",
 };
 
-const SKIP_KEYS = new Set(["attachment"]);
 const HEADER_SKIP_KEYS = new Set(["source"]);
 
 export type EnquiryField = {
@@ -44,7 +43,7 @@ export function parseEnquiryFields(formData: FormData): EnquiryField[] {
   const fields: EnquiryField[] = [];
 
   for (const [key, value] of formData.entries()) {
-    if (SKIP_KEYS.has(key) || typeof value !== "string") continue;
+    if (typeof value !== "string") continue;
     const trimmed = value.trim().slice(0, MAX_FIELD_LENGTH);
     if (!trimmed) continue;
     fields.push({
@@ -73,19 +72,11 @@ export function buildEnquirySubject(
 export function buildEnquiryEmail(
   fields: EnquiryField[],
   options?: {
-    attachmentName?: string;
     source?: string;
     replyTo?: string;
   },
 ): { html: string; text: string } {
   const rows = fields.filter((field) => !HEADER_SKIP_KEYS.has(field.key));
-  if (options?.attachmentName) {
-    rows.push({
-      key: "attachment",
-      label: "Attachment",
-      value: options.attachmentName,
-    });
-  }
 
   const fullName = fieldValue(fields, "fullName");
   const company = fieldValue(fields, "company");

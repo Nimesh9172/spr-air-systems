@@ -5,7 +5,6 @@ import {
   Building2Icon,
   ChevronDownIcon,
   ClockIcon,
-  CloudUploadIcon,
   ListIcon,
   LockIcon,
   MailIcon,
@@ -16,14 +15,7 @@ import {
   UserIcon,
   type LucideIcon,
 } from "lucide-react";
-import {
-  useRef,
-  useState,
-  type ChangeEvent,
-  type DragEvent,
-  type FormEvent,
-  type ReactNode,
-} from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { toast } from "sonner";
 
 import { Container } from "@/components/core/Container";
@@ -41,8 +33,6 @@ import {
 const EASE_OUT = [0.22, 1, 0.36, 1] as const;
 const ITEM_TRANSITION = { duration: 0.6, ease: EASE_OUT } as const;
 const ACCENT = "oklch(0.52 0.16 255)";
-const MAX_FILE_BYTES = 5 * 1024 * 1024;
-const ACCEPTED_TYPES = ".pdf,.doc,.docx,.jpg,.jpeg";
 
 const containerVariants: Variants = {
   hidden: {},
@@ -113,44 +103,6 @@ export function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
   const item = prefersReducedMotion ? reducedItemVariants : itemVariants;
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [fileName, setFileName] = useState<string | null>(null);
-  const [fileError, setFileError] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  function applyFile(file: File | undefined) {
-    if (!file) {
-      setFileName(null);
-      setFileError(null);
-      return;
-    }
-
-    if (file.size > MAX_FILE_BYTES) {
-      setFileName(null);
-      setFileError("File must be 5MB or smaller.");
-      if (fileInputRef.current) fileInputRef.current.value = "";
-      return;
-    }
-
-    setFileName(file.name);
-    setFileError(null);
-  }
-
-  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
-    applyFile(event.target.files?.[0]);
-  }
-
-  function handleDrop(event: DragEvent<HTMLLabelElement>) {
-    event.preventDefault();
-    setIsDragging(false);
-    const file = event.dataTransfer.files?.[0];
-    if (!file || !fileInputRef.current) return;
-
-    const transfer = new DataTransfer();
-    transfer.items.add(file);
-    fileInputRef.current.files = transfer.files;
-    applyFile(file);
-  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -161,8 +113,6 @@ export function ContactSection() {
     try {
       await submitContact(new FormData(form), "Contact Page");
       form.reset();
-      setFileName(null);
-      setFileError(null);
       toast.success(
         "Thank you. Your enquiry has been sent. Our team will get back to you within 24 hours.",
       );
@@ -405,52 +355,6 @@ export function ContactSection() {
                     />
                   </IconInput>
                 </Field>
-              </div>
-
-              <div className="mt-4">
-                <label
-                  htmlFor="contact-file"
-                  onDragOver={(event) => {
-                    event.preventDefault();
-                    setIsDragging(true);
-                  }}
-                  onDragLeave={() => setIsDragging(false)}
-                  onDrop={handleDrop}
-                  className={cn(
-                    "flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed px-4 py-6 text-center transition-colors",
-                    isDragging
-                      ? "border-[oklch(0.52_0.16_255)] bg-[oklch(0.96_0.02_250)]"
-                      : "border-border/80 bg-[oklch(0.985_0.005_250)] hover:border-[oklch(0.72_0.08_250)] hover:bg-[oklch(0.97_0.01_250)]",
-                  )}
-                >
-                  <span className="flex size-10 items-center justify-center rounded-full bg-[oklch(0.94_0.03_250)] text-[oklch(0.5_0.16_255)]">
-                    <CloudUploadIcon
-                      className="size-5"
-                      aria-hidden
-                      strokeWidth={1.75}
-                    />
-                  </span>
-                  <span className="text-sm font-medium text-foreground">
-                    {fileName ?? "Click to upload or drag & drop files here"}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    PDF, DOC, DOCX or JPG (Max. 5MB)
-                  </span>
-                  <input
-                    ref={fileInputRef}
-                    id="contact-file"
-                    name="attachment"
-                    type="file"
-                    accept={ACCEPTED_TYPES}
-                    className="sr-only"
-                    onChange={handleFileChange}
-                  />
-                </label>
-                {fileError ? (
-                  <p className="mt-2 text-xs text-destructive" role="alert">
-                    {fileError}
-                  </p>
-                ) : null}
               </div>
 
               <button
